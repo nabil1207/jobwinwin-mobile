@@ -1,0 +1,73 @@
+<ng-container *ngIf="data" [ngSwitch]="data.type">
+
+  <div *ngSwitchCase="'video'" class="d-block">
+    <img class="mt-2 w-100" src="./assets/img/default-video.svg" alt="Add Video" *ngIf="!data.file else videoFile"
+      (click)="fileVideo.click()">
+    <ng-template #videoFile>
+      <video width="100%" height="200px" controls>
+        <source [src]="('backend_url' | env) + data.file.name">
+      </video>
+    </ng-template>
+    <span class="hint"><span class="required">*</span> Durée maximale de la vidéo : 30 secondes</span>
+    <div class="text-center  mt-1">
+      <span class="hint" *ngIf="data.file" (click)="fileVideo.click()">
+        <ion-icon class="align-middle" src="./assets/icon/video.svg" style="font-size: 20px;"></ion-icon>
+        modifiez la vidéo
+      </span>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="'photo'" class="d-flex">
+    <ion-avatar slot="start" (click)="filePhoto.click()">
+      <img
+        [src]="data.file && data.file.name ? (('backend_url' | env) + data.file.name) : './assets/img/default-image.svg'" />
+    </ion-avatar>
+    <ion-label>
+      <mat-form-field class="w-100">
+        <mat-label class="label-readonly">{{ data.file && data.file.name ? data.file.name : 'Ajouter une photo' }}
+        </mat-label>
+        <input matInput readonly>
+      </mat-form-field>
+    </ion-label>
+  </div>
+
+  <div *ngSwitchCase="'edit-image'">
+    <img
+      [src]="data.file && data.file.name ? (('backend_url' | env) + data.file.name) : '/assets/img/default-image.svg'"
+      alt="profil" class="logo">
+    <div class="change-photo" (click)="filePhoto.click()">
+      <mat-icon color="primary">edit</mat-icon>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="'simple-cv'">
+    <mat-form-field class="upload-cv w-100">
+      <mat-label class="label-readonly">CV</mat-label>
+      <input [value]="data.file && data.file.name ? data.file.name: ' Téléchargez votre cv'" matInput readonly>
+      <mat-icon matSuffix color="primary" (click)="fileCV.click()">cloud_download</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div *ngSwitchCase="'cv'">
+    <div class="text-center mt-5">
+      <img class="d-inline mr-2" src="./assets/icon/modifierCV.svg" alt="Modifier CV" (click)="fileCV.click()">
+      <a [href]="data.file ? (('backend_url' | env) + data.file.name) : '#'"> <img class="d-inline"
+          src="./assets/icon/VisualiserCV.svg" alt="Visualider CV"> </a>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="'update-picture'">
+    <mat-icon class="change-photo" color="primary" (click)="filePhoto.click()">add_a_photo</mat-icon>
+  </div>
+
+  <!-- <input type="file" (change)="onFileChange($event)" class="display-none" #file> -->
+
+  <input type="file" (change)="onFileChange($event)" style="display: none;" hidden accept="image/x-png,image/jpeg"
+    #filePhoto>
+
+  <input type="file" accept="application/pdf,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" (change)="onFileChange($event)" style="display: none;" hidden #fileCV>
+ 
+  <input type="file" (change)="onFileChangeVideo($event)" style="display: none;" hidden
+    accept="video/mp4,video/x-m4v,video/*" #fileVideo>
+
+</ng-container>

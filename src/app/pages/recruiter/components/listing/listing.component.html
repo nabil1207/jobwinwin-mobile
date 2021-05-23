@@ -1,0 +1,59 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons (click)="goBack()" class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <ion-buttons slot="primary">
+            <ion-button>
+                <ion-icon slot="icon-only" ios="ellipsis-vertical" md="ellipsis-vertical"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+        <ion-title>Recruteurs</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="steps-content">
+        <article class="page-content">
+
+            <form class="mb-3">
+                <div class="d-block">
+                    <div class="form-group position-relative d-inline w-100">
+                        <input class="custom-input search-input border-bleu" type="text" name="search"
+                            placeholder="Rechercher un recruteur" [(ngModel)]="search" (ngModelChange)="onSearch()">
+                        <span class="icon-search position-absolute">
+                            <img src="./assets/icon/search.svg">
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+            <ion-item class="list-of-recruiter ion-no-padding" lines="none" *ngFor="let recruiter of recruiterService.recruiters">
+                <ion-avatar slot="start">
+                    <img [src]="recruiter.picture ? (('backend_url' | env) + recruiter.picture.name) : 
+                    (recruiter.civility === 'Mr' ? '/assets/img/male.svg' : '/assets/img/female.svg' )" alt="">
+                </ion-avatar>
+                <ion-label>
+                    <ion-button [routerLink]="['/dashboard/recruiter/detail-recruiter', recruiter._id]" routerDirection="root"class="name-recruiter" color="primary">
+                       {{ recruiter.firstName }}
+                       {{ recruiter.lastName }}
+                    </ion-button>
+                </ion-label>
+            </ion-item>
+
+            <ion-item class="list-of-recruiter ion-no-padding" lines="none">
+                <ion-avatar slot="start">
+                    <img src="./assets/img/default-image.svg" />
+                </ion-avatar>
+                <ion-label>
+                    <ion-button class="name-recruiter light-color" (click)="onAdd()">
+                       <ion-icon name="add"></ion-icon>
+                       Ajouter un recruteur
+                    </ion-button>
+                </ion-label>
+            </ion-item>
+
+        </article>
+    </section>
+
+</ion-content>

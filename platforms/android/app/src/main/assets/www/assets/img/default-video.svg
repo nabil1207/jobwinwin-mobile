@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="290" height="163" viewBox="0 0 290 163">
+  <g id="default-video" transform="translate(-35 -260)">
+    <rect id="Rectangle_86" data-name="Rectangle 86" width="290" height="163" transform="translate(35 260)" fill="#e3eaff"/>
+    <text id="Ajouter_une_vidéo" data-name="Ajouter une vidéo" transform="translate(131.333 367)" fill="#445ca6" font-size="12.7" font-family="Helvetica"><tspan x="0" y="0">Ajouter une vidéo</tspan></text>
+    <g id="Vector_Smart_Object" data-name="Vector Smart Object">
+      <g id="Vector_Smart_Object-2" data-name="Vector Smart Object" transform="translate(-440.727 101.615)">
+        <g id="Group_2" data-name="Group 2">
+          <g id="Group_1" data-name="Group 1">
+            <path id="Path_1" data-name="Path 1" d="M640.068,215.249a1.455,1.455,0,0,0-1.357-.057l-9.126,4.368v-3.176a4.094,4.094,0,0,0-4.178-4h-19.5a4.092,4.092,0,0,0-4.178,4v16a4.092,4.092,0,0,0,4.178,4h19.5a4.094,4.094,0,0,0,4.178-4V229.21l9.126,4.375a1.423,1.423,0,0,0,1.869-.6,1.286,1.286,0,0,0,.148-.6v-16A1.323,1.323,0,0,0,640.068,215.249Zm-24.411,14.468a5.338,5.338,0,1,1,5.572-5.334A5.455,5.455,0,0,1,615.657,229.717Z"/>
+          </g>
+        </g>
+      </g>
+      <path id="Color_Overlay" data-name="Color Overlay" d="M165.179,338A4.092,4.092,0,0,1,161,334V318a4.092,4.092,0,0,1,4.178-4h19.5a4.094,4.094,0,0,1,4.179,4v3.176l9.126-4.369a1.457,1.457,0,0,1,1.357.058A1.323,1.323,0,0,1,200,318v16a1.292,1.292,0,0,1-.148.6,1.423,1.423,0,0,1-1.869.6l-9.126-4.376V334a4.094,4.094,0,0,1-4.179,4Zm4.179-12a5.577,5.577,0,1,0,5.572-5.332A5.455,5.455,0,0,0,169.357,326Z" fill="#445ca6"/>
+    </g>
+  </g>
+</svg>

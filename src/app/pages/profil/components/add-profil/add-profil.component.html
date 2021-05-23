@@ -1,0 +1,16 @@
+<div appScrollToTop>
+  <form class="d-block">
+    <div class="text-center mt-3">
+      <h1 class="title">Ajouter votre meilleure photo <br> de profil ! </h1>
+      <img class="circle-image mt-3"
+        [src]="authService.user.picture ? (('backend_url' | env) + authService.user.picture.name) : '/assets/img/default-image.svg'"
+        alt="Add Photo" (click)="addImageAction()">
+    </div>
+  
+    <div class="mt-3 text-center">
+      <ion-button class="w-80" color="primary" (click)="onSave()">
+        Continuez
+      </ion-button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,100 @@
+
+
+<div class="notifications" *ngIf="notifService.notifications.length else Nonotifications">
+    <ion-list>
+        <ion-list-header>
+            Notifications
+        </ion-list-header>
+        <div class="position-relative" *ngFor="let item of notifService.notifications">
+            <!-- <div class="badge-new">
+                Nouveau 
+            </div> --> 
+            <ion-item class="list-notif" *ngIf="item.type === 'status'" routerLink="/dashboard/advertisement">
+                <ng-container *ngIf="item.advertisement.status ==='Close'">
+                    <ion-avatar slot="start">
+                        <img [src]="item.picture ? (('backend_url' | env) + item.picture.name) : '../../../assets/img/default-image.svg' " alt="Profil">
+                    </ion-avatar>
+                    <ion-label>
+                        <h2>{{ item.civility }}.{{ item.firstName }} {{ item.lastName }}
+                            <span class="date-notif">{{ item.time | date}}</span>
+                        </h2>
+                        <p>Votre annonce de <span class="intitule-annonce">{{ item.advertisement.desiredJob }}</span>
+                            a été <span style="color: red"> refusée</span> prenez contact avec le responsable
+                        </p>
+                    </ion-label>
+                </ng-container> 
+                <ng-container *ngIf="item.advertisement.status ==='Ouverte'">
+                    <ion-avatar slot="start">
+                        <img [src]="item.picture ? (('backend_url' | env) + item.picture.name) : '../../../assets/img/default-image.svg' " alt="Profil">
+                    </ion-avatar>
+                    <ion-label>
+                        <h2>{{ item.civility }}.{{ item.firstName }} {{ item.lastName }}
+                            <span class="date-notif">{{ item.time | date}}</span>
+                        </h2>
+                        <p>Votre annonce de <span class="intitule-annonce"> {{ item.advertisement.desiredJob }}</span>
+                            a été <span style="color: green"> validée</span> vous pouvez commencer à matcher avec des candidats
+                        </p>
+                    </ion-label>
+                </ng-container>
+            </ion-item>
+
+            <ion-item class="list-notif" *ngIf="item.type === 'pendingAdvertisement'"> 
+                <ion-avatar slot="start">
+                    <img [src]="item.picture ? (('backend_url' | env) + item.picture.name) : '../../../assets/img/default-image.svg' " alt="Profil">
+                </ion-avatar>
+                <ion-label>
+                    <h2>{{ item.civility }}.{{ item.firstName }} {{ item.lastName }}
+                        <span class="date-notif">{{ item.time | date}}</span>
+                    </h2>
+                    <p>Votre annonce de <span class="intitule-annonce"> {{ item.advertisement.desiredJob }}</span>
+                        est en cours de validation.
+                    </p>
+                </ion-label>
+            </ion-item>
+
+            <ion-item class="list-notif" *ngIf="item.type === 'match'"> 
+                <ion-avatar slot="start">
+                    <img src="../../../assets/img/default-image.svg">
+                </ion-avatar>
+                <ion-label>
+                    <h2>
+                        Félicitations ! 
+                        <!-- {{ item.firstName }} {{ item.lastName }} -->
+                        <span class="date-notif">{{ item.time | date}}</span>
+                    </h2>
+                    <p> 
+                        Vous avez bien Match
+                    </p>
+                </ion-label>
+            </ion-item>
+
+            <ion-item class="list-notif" *ngIf="item.type === 'advertisement'" routerLink="/dashboard/advertisement">
+                <ng-container>
+                    <ion-avatar slot="start">
+                        <img [src]="item.picture ? (('backend_url' | env) + item.picture.name) : '../../../assets/img/default-image.svg' " alt="Profil">
+                    </ion-avatar>
+                    <ion-label>
+                        <h2>{{ item.civility }}.{{ item.firstName }} {{ item.lastName }}
+                            <span class="date-notif">{{ item.time | date}}</span>
+                        </h2>
+                        <p>A crée une annonce de <span class="intitule-annonce"> {{ item.advertisement.desiredJob }}</span>
+                            souhaitez-vous la valider ?
+                        </p>
+                    </ion-label>
+                </ng-container>
+            </ion-item>
+            
+        </div>
+    </ion-list>
+</div>
+<ng-template #Nonotifications>
+    <div class="no-notifications">
+        <ion-icon src="./assets/icon/no-notification.svg"></ion-icon>
+        <p class="color-muted text-center">
+            Vous n'avez pas de notification
+        </p>
+        <!-- <button class="btn-parametre" type="button">
+            Parametre notification
+        </button> -->
+    </div>
+</ng-template>

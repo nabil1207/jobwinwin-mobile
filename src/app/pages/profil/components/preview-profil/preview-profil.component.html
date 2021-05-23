@@ -1,0 +1,143 @@
+<ion-content class="file-dashboard">
+    <ion-header class="ion-no-border py-2" mode="md">
+        <ion-toolbar>
+            <ion-buttons routerLink="/dashboard/profile/values" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <ion-title class="text-center">{{ authService.user.firstName }} {{ authService.user.lastName }}</ion-title>
+        </ion-toolbar>
+        <div class="d-block text-center">
+            <img src="./assets/icon/space-title.svg" alt="">
+            <p class="short-desc mb-0">
+                J’ai pu constater que nous avons fréquenté le même
+                établissement. Ce serait un plaisir de pouvoir évoquer ce sujet et d’autres autour d’une
+                activité.
+            </p>
+            <img src="./assets/icon/space-title.svg" alt="">
+            <div class="profil-files">
+                <img src="./assets/img/female.svg" alt="" class="w-100">
+            </div>
+        </div>
+    </ion-header>
+
+    <ion-slides class="files-slide">
+        <ion-slide>
+            <div class="position-relative mt-1 mb-3">
+                <button class="position-absolute arrow-right cursor-pointer bg-transparent"><img
+                        src="./assets/icon/arrow-right.svg" alt=""></button>
+                <div class="custom-fields text-center">
+                    <span>{{ candidateService.candidate.currentJob }}</span>
+                </div>
+
+                <div class="custom-fields text-center">
+                    <div class="d-inline w-40 text-center mr-1 mt-2">{{ candidateService.candidate.currentLocation }}</div>
+                    <div class="d-inline w-40 text-center mt-2">{{ candidateService.candidate.experienceYears }} ans d’expérience</div>
+                </div>
+
+                <h3 class="objectif">OBJECTIFS ACTUELS</h3>
+
+                <div class="custom-fields text-center mt-2">
+                    <span>{{ candidateService.candidate.goal }} </span>
+                </div>
+                <div class="custom-fields text-center">
+                    <div class="d-inline w-40 text-center mr-1 mt-2">{{ candidateService.candidate.location }}</div>
+                    <div class="d-inline w-40 text-center">{{ candidateService.candidate.supposedSalaryMax }} DH</div>
+                </div>
+            </div>
+        </ion-slide>
+
+        <ion-slide class="mb-3">
+            <div class="position-relative mt-1 py-2">
+                <button class="position-absolute arrow-left cursor-pointer bg-transparent"><img
+                        src="./assets/icon/arrow-left.svg" alt=""></button>
+                <button class="position-absolute arrow-right cursor-pointer bg-transparent"><img
+                        src="./assets/icon/arrow-right.svg" alt=""></button>
+
+                <h3 class="objectif">CV- RÉSUMÉ</h3>
+
+                <div class="text-center mt-2">
+                    <img class="w-100" src="./assets/img/default-video.svg" alt="Add Video">
+                </div>
+
+                <div class="matching-card-details mt-2" style="height: 50px;">
+                    <h3 class="title">
+                        <mat-icon>subject</mat-icon>
+                        <span>CV</span>
+                        <mat-icon class="float-right">save_alt</mat-icon>
+                    </h3>
+                </div>
+
+                <div class="matching-card-details mt-2">
+                    <h3 class="title">
+                        <mat-icon>mediation</mat-icon>
+                        <span>EXPÉRIENCE</span>
+                    </h3>
+                    <span class="desc">
+                        <ul class="list">
+                            <li>Actuellement : Directrice Générale</li>
+                            <li>2005-2011 : Responsable de marketing</li>
+                            <li>2000-2005 : Responsable commerciale.</li>
+                        </ul>
+                    </span>
+                </div>
+
+                <div class="matching-card-details mt-2">
+                    <h3 class="title">
+                        <mat-icon>school</mat-icon>
+                        <span>FORMATION</span>
+                    </h3>
+                    <span class="desc">
+                        <ul class="list">
+                            <li *ngFor="let item of candidate.candidate.trainings">{{ item.yearOfGraduation }} : {{ item.studyLevel }} en {{ item.typeOfTraining }}</li>
+                        </ul>
+                    </span>
+                </div>
+
+                <div class="matching-card-details mt-2">
+                    <h3 class="title">
+                        <mat-icon>g_translate</mat-icon>
+                        <span>LANGUE</span>
+                    </h3>
+                    <span class="desc">
+                        <ul class="list">
+                            <li *ngFor="let item of candidate.languages">{{ item.language }} : {{ item.languageLevel }}</li>
+                        </ul>
+                    </span>
+                </div>
+
+            </div>
+        </ion-slide>
+
+        <ion-slide>
+            <div class="position-relative py-2 mt-1 mb-3">
+                <div class="d-block text-center">
+                    <h3 class="objectif">MES COMPÉTENCES</h3>
+                </div>
+                <button class="position-absolute arrow-left cursor-pointer bg-transparent"><img
+                    src="./assets/icon/arrow-left.svg" alt=""></button>
+
+                <div class="matching-card-details">
+                    <div class="desc">
+                        <ul class="list">
+                            <li *ngFor="let item of candidate.skills">
+                                {{item.softSkill}}
+                                <!-- <span class="float-right">Expert</span> -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="objectif">MES VALEURS</h3>
+
+                <div class="matching-card-details mt-2">
+                    <div class="desc">
+                        <ul class="list">
+                            <li *ngFor="let item of candidate.values">{{ item.value }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </ion-slide>
+    </ion-slides>
+
+</ion-content>

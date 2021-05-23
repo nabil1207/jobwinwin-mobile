@@ -1,0 +1,138 @@
+<form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons (click)="modalController.dismiss()" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <!-- <ion-buttons slot="end">
+                <ion-button type="submit" [disabled]="!form.valid">
+                    Enregistrer
+                </ion-button>
+            </ion-buttons> -->
+            <ion-title>Mes formations</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="steps-content">
+
+            <ion-item class="custom-select w-100">
+                <ion-label position="floating">Niveau d'études le plus élevé</ion-label>
+                <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                    formControlName="levelOfStudies">
+                    <ion-select-option *ngFor="let item of globalService.levelOfStudies" [value]="item._id">
+                        {{item.name}}</ion-select-option>
+                </ion-select>
+                <small class="text-error"
+                    *ngIf="form.get('levelOfStudies').invalid && (form.get('levelOfStudies').dirty || form.get('levelOfStudies').touched) ">
+                    Champ obligatoire
+                </small>
+            </ion-item>
+
+            <div class="mt-2" formArrayName="trainings">
+
+                <ng-container *ngFor="let training of form.get('trainings')['controls']; let i=index; let last=last;"
+                    [formGroupName]="i">
+
+                    <div class="w-100">
+                        <ion-item class="custom-input">
+                            <ion-label position="floating">Intitulé de la formation <span class="required">*</span>
+                            </ion-label>
+                            <ion-input type="text" formControlName="name"></ion-input>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('trainings')['controls'][i].get('name').invalid && (form.get('trainings')['controls'][i].get('name').dirty || form.get('trainings')['controls'][i].get('name').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+
+                    <ion-item class="custom-select w-100">
+                        <ion-label position="floating">Niveau d'études</ion-label>
+                        <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                            formControlName="studyLevel">
+                            <ion-select-option *ngFor="let item of globalService.levelOfStudies" [value]="item._id">
+                                {{item.name}}</ion-select-option>
+                        </ion-select>
+                        <small class="text-error"
+                            *ngIf="form.get('trainings')['controls'][i].get('studyLevel').invalid && (form.get('trainings')['controls'][i].get('studyLevel').dirty || form.get('trainings')['controls'][i].get('studyLevel').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </ion-item>
+
+
+                    <ion-item class="custom-select w-100">
+                        <ion-label position="floating">Type de formation</ion-label>
+                        <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                            formControlName="typeOfTraining">
+                            <ion-select-option *ngFor="let item of globalService.typeOfTrainings" [value]="item._id">
+                                {{item.name}}</ion-select-option>
+                        </ion-select>
+                        <small class="text-error"
+                            *ngIf="form.get('trainings')['controls'][i].get('typeOfTraining').invalid && (form.get('trainings')['controls'][i].get('typeOfTraining').dirty || form.get('trainings')['controls'][i].get('typeOfTraining').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </ion-item>
+
+                    <div class="w-100">
+                        <ion-item class="custom-input">
+                            <ion-label position="floating">École <span class="required">*</span></ion-label>
+                            <ion-input type="text" formControlName="school"></ion-input>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('trainings')['controls'][i].get('school').invalid && (form.get('trainings')['controls'][i].get('school').dirty || form.get('trainings')['controls'][i].get('school').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+                        <div fxLayout="column" fxFlex.xs="45%">
+                            <ion-item class="custom-datetime w-100">
+                                <ion-label position="floating">Année d’obtention</ion-label>
+                                <ion-datetime placeholder="De" displayFormat="YYYY" pickerFormat="YYYY"
+                                    formControlName="yearOfGraduation">
+                                </ion-datetime>
+                            </ion-item>
+                            <small class="text-error"
+                                *ngIf="form.get('trainings')['controls'][i].get('yearOfGraduation').invalid && (form.get('trainings')['controls'][i].get('yearOfGraduation').dirty || form.get('trainings')['controls'][i].get('yearOfGraduation').touched) ">
+                                Champ obligatoire
+                            </small>
+                        </div>
+
+                        <div fxLayout="column" fxFlex.xs="45%">
+                            <ion-item class="custom-input">
+                                <ion-label position="floating">Lieu <span class="required">*</span></ion-label>
+                                <ion-input type="text" formControlName="location"></ion-input>
+                            </ion-item>
+                            <small class="text-error"
+                                *ngIf="form.get('trainings')['controls'][i].get('location').invalid && (form.get('trainings')['controls'][i].get('location').dirty || form.get('trainings')['controls'][i].get('location').touched) ">
+                                Champ obligatoire
+                            </small>
+                        </div>
+
+                    </div>
+
+                    <div class="text-right mt-1">
+                        <ion-button fill="outline" class="btn-outline-danger ml-30" color="danger"
+                            *ngIf="form.controls['trainings']['controls'].length > 1"
+                            (click)="removeField(i, 'trainings')">
+                            Supprimer
+                        </ion-button>
+                    </div>
+                </ng-container>
+                <div class="text-left mt-1">
+                    <ion-button fill="outline" class="btn-outline" color="primary"
+                        [disabled]="!form.controls.trainings || !form.controls.trainings.valid"
+                        (click)="addField('trainings')">
+                        <ion-icon slot="start" name="add"></ion-icon>
+                        Ajouter une Formation
+                    </ion-button>
+                </div>
+
+            </div>
+            <div class="text-right mt-2">
+                <ion-button type="submit" [disabled]="!form.valid">
+                    Enregistrer
+                </ion-button>
+            </div>
+        </section>
+    </ion-content>
+</form>

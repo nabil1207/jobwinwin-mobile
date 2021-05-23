@@ -1,0 +1,36 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons (click)="goBack()" class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <ion-title>Paramètres</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="settings-content mb-3">
+        <div class="page-content">
+            <div class="d-block">
+                <ion-item class="ion-no-padding" detail="true" (click)="editEntreprise()" *appHasPermission="['read_infos_company']">
+                    <ion-label class="ml-3"> Informations entreprise </ion-label>
+                </ion-item>
+
+                <ion-item class="ion-no-padding" detail="true" (click)="openAccount()">
+                    <ion-label class="ml-3"> Compte </ion-label>
+                </ion-item>
+
+                <ion-item class="ion-no-padding" detail="true" (click)="openIdentity()">
+                    <ion-label class="ml-3"> Identité </ion-label>
+                </ion-item>
+
+                <ion-item class="ion-no-padding" detail="true">
+                    <ion-label class="ml-3"> Confidentialité </ion-label>
+                </ion-item>
+
+                <div class="mt-3 text-center">
+                    <ion-button class="w-80" color="primary" (click)="authService.logout()">Déconnexion</ion-button>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+</ion-content>

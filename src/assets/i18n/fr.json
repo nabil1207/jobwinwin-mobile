@@ -1,0 +1,31 @@
+{
+    "shared": {
+        "validations": {
+            "required": "Le champ est obligatoire.",
+            "email": "Veuillez renseigner une adresse e-mail valide.",
+            "required-ConfirmPassword": "Les mots de passe ne <strong>correspondent pas</strong>",
+            "required-password": "Le champ doit contenir au moins <strong>5</strong> caractères"
+        }
+    },
+    "api": {
+        "message": "Enregistré avec succès",
+        "successfully_updated": "Enregistré avec succès",
+        "create_success": "Enregistré avec succès",
+        "forgot_password": "Vérifier votre boite email",
+        "update_success": "Enregistré avec succès",
+        "delete_success": "Supprimer avec succès",
+        "email_not_found": "Email n'existe pas",
+        "password_updated": "Mot de passe à été modifer",
+        "server_error": "Erreur serveur",
+        "invalid_verification_code": "Code de vérification est invalide",
+        "activation_success": "Compte à été activé",
+        "verified": "Compte verifié",
+        "not_found": "Une erreur est survenue essayer de ce déconnecter et reconnceter vous !",
+        "user_not_found": "Utilisateur n'existe pas",
+        "update_profile": "Votre profile à été modifier avec succès",
+        "update_identity": "Votre identité à été modifier avec succès",
+        "incorrect_credentials": "Adresse mail ou mot de passe incorrect",
+        "User_email_unique_field": "Adresse email existe",
+        "picture_updated": "La photo de profil à été modifiée"
+    }
+}

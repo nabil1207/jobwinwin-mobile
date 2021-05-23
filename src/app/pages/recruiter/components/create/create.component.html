@@ -1,0 +1,89 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons (click)="modalCtrl.dismiss()" class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <ion-title> {{ form.get('_id').value ? 'Modifier le recruteur' : 'Ajouter un recruteur' }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="steps-content">
+        <div class="page-content">
+            <form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+
+                <ion-item class="custom-input">
+                    <ion-label position="floating">Nom <span class="required">*</span></ion-label>
+                    <ion-input type="text" formControlName="lastName"></ion-input>
+                </ion-item>
+                <small class="text-error"
+                    *ngIf="form.get('lastName').invalid && (form.get('lastName').dirty || form.get('lastName').touched) ">
+                    Champ obligatoire
+                </small>
+
+                <ion-item class="custom-input">
+                    <ion-label position="floating">Prénom <span class="required">*</span></ion-label>
+                    <ion-input type="text" formControlName="firstName"></ion-input>
+                </ion-item>
+                <small class="text-error"
+                    *ngIf="form.get('firstName').invalid && (form.get('firstName').dirty || form.get('firstName').touched) ">
+                    Champ obligatoire
+                </small>
+
+                <ion-item class="custom-select">
+                    <ion-label position="floating">Civilité <span class="required">*</span></ion-label>
+                    <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                        formControlName="civility">
+                        <ion-select-option value="Mr">Mr</ion-select-option>
+                        <ion-select-option value="Mme">Mme</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <small class="text-error"
+                    *ngIf="form.get('civility').invalid && (form.get('civility').dirty || form.get('civility').touched) ">
+                    Champ obligatoire
+                </small>
+
+                <ion-item class="custom-input">
+                    <ion-label position="floating">Email <span class="required">*</span></ion-label>
+                    <ion-input type="email" formControlName="email"></ion-input>
+                </ion-item>
+                <small class="text-error"
+                    *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched) ">
+                    Champ obligatoire
+                </small>
+
+                <ion-item class="custom-input">
+                    <ion-label position="floating">Fonction <span class="required">*</span></ion-label>
+                    <ion-input type="text" formControlName="function"></ion-input>
+                </ion-item>
+                <small class="text-error"
+                    *ngIf="form.get('function').invalid && (form.get('function').dirty || form.get('function').touched) ">
+                    Champ obligatoire
+                </small>
+
+                <div class="w-100 custom-input">
+                    <ion-item class="custom-input">
+                        <ion-label position="floating">Téléphone personnel (+212) </ion-label>
+                        <ion-input type="tel" formControlName="firstPhoneNumber"></ion-input>
+                    </ion-item>
+                </div>
+
+                <div class="w-100 custom-input">
+                    <ion-item class="custom-input">
+                        <ion-label position="floating">Téléphone professionnel (+212) </ion-label>
+                        <ion-input type="tel" formControlName="secondPhoneNumber"></ion-input>
+                    </ion-item>
+                </div>
+
+                <ion-item class="input-upload-image ion-no-padding mt-1" lines="full">
+                    <app-file-uploader [data]="value" (fileChanges)="fileChanges($event)"></app-file-uploader>
+                </ion-item>
+
+                <div class="mt-3 text-center">
+                    <ion-button type="submit" [disabled]="!form.valid" class="w-80" color="primary">
+                        Confirmé
+                    </ion-button>
+                </div>
+            </form>
+        </div>
+    </section>
+</ion-content>

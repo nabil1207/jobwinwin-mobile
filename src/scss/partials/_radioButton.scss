@@ -1,0 +1,16 @@
+ion-radio {
+  margin-right: 5px !important;
+}
+mat-radio-button {
+  color: var(--ion-color-primary);
+}
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: var(--ion-color-primary);
+}
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: var(--ion-color-primary);
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color: var(--ion-color-light) !important;
+}

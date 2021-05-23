@@ -1,0 +1,22 @@
+<form class="d-block">
+
+    <div class="text-center mt-2">
+        <h2>{{advertisementService.advertisement.desiredJob}}</h2>
+        <p class="px-0">Votre annonce de "{{advertisementService.advertisement.desiredJob}}" a été créée avec succès </p>
+        <p class="px-0">Pour visualiser et modifier les informations, prévisualisez votre annonce.</p>
+        <p class="px-0">Pour la valider et la publier, cliquez sur win. </p>
+        <p class="px-0">avec Jobwinwin, swipez, matchez et rencontrez le candidat adéquat ! </p>
+    </div>
+    <div class="mt-3 text-center">
+        <ion-button class="w-80" color="primary" (click)="previewAdvertisement()">
+            Prévisualisez votre annonce
+        </ion-button>
+    </div>
+
+    <div class="mt-1 text-center">
+        <ion-button class="btn-win w-80" color="primary" (click)="onSave()">
+            <img src="./assets/icon/win-btn.svg" alt="">
+        </ion-button>
+    </div>
+
+</form>

@@ -1,0 +1,24 @@
+ion-slides {
+    height: 100%;
+    .swiper-slide {
+      display: block;
+    }
+    .swiper-slide img {
+      max-height: 50%;
+      max-width: 80%;
+      margin: 16px 0 40px;
+      pointer-events: none;
+    }
+  
+    p {
+      padding: 0 40px 2em 40px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ion-color-step-600, #60646b);
+    }
+    .swiper-pagination-bullet-active {
+      width: 16px !important;
+      height: 16px !important;
+    }
+  }
+  

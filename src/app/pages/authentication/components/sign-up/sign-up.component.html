@@ -1,0 +1,99 @@
+<ion-header class="auth-header signup-background ion-no-border" mode="md">
+  <ion-toolbar class="auth-toolbar">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/auth/account-type" routerDirection="root" class="roundbutton p-0">
+        <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="page-title">
+      <h1 class="title mb-0">Créer votre compte</h1>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+  <section class="auth-content auth-signup p-1">
+
+    <ion-grid class="h-100">
+      <ion-row class="h-100">
+        <ion-col size="12" class="ion-align-self-start">
+          <div class="page-content">
+            <form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+              <div class="form-group">
+                <input class="custom-input" type="text" placeholder="Votre prénom" formControlName="lastName">
+                <small class="text-error"
+                  *ngIf="form.get('lastName').touched && form.get('lastName').hasError('required')">
+                  {{ 'shared.validations.required' | translate}}
+                </small>
+              </div>
+              <div class="form-group">
+                <input class="custom-input" type="text" placeholder="Votre nom" formControlName="firstName">
+                <small class="text-error"
+                  *ngIf="form.get('firstName').touched && form.get('firstName').hasError('required')">
+                  {{ 'shared.validations.required' | translate}}
+                </small>
+              </div>
+              <div class="form-group">
+                <input class="custom-input" type="email" placeholder="E-mail" formControlName="email">
+                <small class="text-error" *ngIf="form.get('email').touched && (form.get('email').hasError('email') || 
+                form.get('email').hasError('required'))">
+                  {{ 'shared.validations.email' | translate}}
+                </small>
+              </div>
+              <div class="form-group">
+                <input class="custom-input" type="password" placeholder="Mot de passe" formControlName="password">
+                <small class="text-error" *ngIf="form.get('password').touched && (form.get('password').hasError('minlength') || 
+                form.get('password').hasError('required'))"
+                  [innerHtml]="'shared.validations.required-password' | translate"></small>
+              </div>
+              <div class="form-group position-relative">
+                <input class="custom-input" type="password" placeholder="Confirmez le mot de passe"
+                  formControlName="confirmPassword">
+                <small class="text-error"
+                  *ngIf="form.get('confirmPassword').touched &&
+                      (form.get('confirmPassword').hasError('required') || form.get('confirmPassword').hasError('minlength'))">
+                  Le champ doit contenir au moins <strong>5</strong> caractères.
+                </small>
+                <small *ngIf="form.get('confirmPassword').touched &&
+                      !form.get('confirmPassword').hasError('required') &&
+                      !form.get('confirmPassword').hasError('minlength') &&
+                      form.hasError('passwordsDoNotMatch')" class="text-error">
+                  Les mots de passe ne <strong>correspondent pas</strong>.
+                </small>
+              </div>
+              <p class="condition-politique ion-text-center">
+                En appuyant sur je m'inscris et j'accepte, vous reconnaissez avoir lu notre
+                <span class="link">Politique de confidentialité </span> et acceptez nos <span class="link"> Conditions
+                  d'utilisation </span> du service
+              </p>
+              <div class="mt-1">
+                <ion-button type="submit" class="w-100" color="primary" [disabled]="!form.valid">Je m'inscris
+                </ion-button>
+              </div>
+              <p class="hint ion-text-center">
+                En vous connectant.vous acceptez nos conditions générales. Pour en savoir plus sur l'usage que nous
+                faisons de
+                vos données, consultez notre Politique de confidentialité et notre Politique en matière de cookies.
+              </p>
+            </form>
+
+            <div class="other-choice text-center mt-2">
+              <h3 class="title">Ou inscrivez-vous avec </h3>
+              <p class="text-center mt-2">
+                <img class="mr-2" src="./assets/icon/linkedin.svg">
+                <img src="./assets/icon/google.svg">
+              </p>
+            </div>
+
+          </div>
+        </ion-col>
+        <ion-col size="12" class="ion-align-self-end">
+          <div class="footer-auth text-center">
+            <p class="mt-1 copyright">Vous avez déjà un compte ?
+              <a routerLink="/" routerDirection="root"><span class="link">S’identifier</span></a>
+            </p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </section>
+</ion-content>

@@ -1,0 +1,170 @@
+<form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons (click)="close()" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <ion-title>Prérequis</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="steps-content">
+            <div class="page-content">
+
+                <div class="w-100">
+                    <ion-item class="custom-input">
+                        <ion-label position="floating">Pré-requis <span class="required">*</span></ion-label>
+                        <ion-input type="text" formControlName="prerequisite"></ion-input>
+                    </ion-item>
+                    <small class="text-error"
+                        *ngIf="form.get('prerequisite').invalid && (form.get('prerequisite').dirty || form.get('prerequisite').touched) ">
+                        Champ obligatoire
+                    </small>
+                </div>
+
+                <app-multi-select label="Soft skills" [limit]="5" collection="softSkills" formControlName="skills">
+                </app-multi-select>
+                
+                <!-- <small class="text-error" *ngIf="form.get('skills').value?.length === 0 ">
+                    Veuillez renseigner ces valeurs
+                </small>
+                <small class="text-error" *ngIf="form.get('skills').value?.length < 5 && form.get('skills').value?.length !== 0">
+                    Veuillez renseigner au moins 5 valeur
+                </small>  -->
+
+                <small class="text-error" *ngIf="form.get('skills').value?.length < 5">
+                    Vous pouvez choisir jusqu'à 5 soft skills dans la liste
+                </small>
+
+
+                <div formGroupName="languages">
+                    <div class="mt-1" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+
+                        <ion-item class="custom-select w-100" fxLayout="column" fxFlex.xs="45%">
+                            <ion-label position="floating">Langue</ion-label>
+                            <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                                formControlName="language">
+                                <ion-select-option
+                                    *ngFor="let item of globalService.languages | languages:languagesList"
+                                    [value]="item._id">
+                                    {{item.name}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item class="custom-select w-100" fxLayout="column" fxFlex.xs="45%">
+                            <ion-label position="floating">Niveau de langue</ion-label>
+                            <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                                formControlName="languageLevel">
+                                <ion-select-option *ngFor="let item of globalService.languagesLevels" [value]="item._id">
+                                    {{item.name}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
+                    </div>
+                    <small class="text-error" *ngIf="languagesList <= 0">
+                        Veuillez renseigner au moins une valeur
+                    </small>  
+                </div>
+                <div class="mt-1 text-left">
+                    <ion-button fill="outline" class="btn-outline w-40" color="primary"
+                        [disabled]="form.get('languages').invalid" (click)="addLanguage()">
+                        Ajouter
+                        <ion-icon slot="end" name="add"></ion-icon>
+                    </ion-button>
+                </div>
+                <div class="mb-1 mt-1">
+                    <ul class="customList">
+                        <li *ngFor="let item of languagesList;let i =index;">
+                            <span class="text-primary text-left">{{ item.language.name }} :
+                                {{ item.languageLevel.name }}</span>
+                            <mat-icon class="cursor-pointer btn-round vertical-align ml-1" (click)="deleteLanguage(i)">
+                                close</mat-icon>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div formGroupName="programingLanguages" class="mb-1" fxLayout="row" fxLayoutAlign="space-between"
+                    fxLayoutGap="20px">
+                    <div fxLayout="column" fxFlex.xs="45%">
+                        <app-multi-select label="Langages informatiques" collection="programmingLanguages"
+                            formControlName="language"></app-multi-select>
+                        <small class="text-error" *ngIf="form.get('programingLanguages.language').value?.length <= 0">
+                            Veuillez choisir au moins un Langages informatiques.
+                        </small>
+                    </div>
+                    <div fxLayout="column" fxFlex.xs="45%">
+                        <app-multi-select label="Logiciels informatiques" collection="logiciels"
+                            formControlName="logiciel">
+                        </app-multi-select>
+                        <small class="text-error" *ngIf="form.get('programingLanguages.logiciel').value?.length <= 0">
+                            Veuillez choisir au moins un Logiciels informatiques.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="w-100">
+                    <app-multi-select label="Formation souhaitée" collection="typeOfTrainings" formControlName="typeOfTraining">
+                    </app-multi-select>
+                    <small class="text-error" *ngIf="form.get('typeOfTraining').value?.length <= 0">
+                        Veuillez choisir au moins une Formation.
+                    </small>
+                </div>
+                <!-- <ion-item class="custom-select w-100">
+                    <ion-label position="floating">Formation souhaitée <span class="required">*</span>
+                    </ion-label>
+                    <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                        formControlName="typeOfTraining">
+                        <ion-select-option *ngFor="let typeOfTraining of globalService.typeOfTrainings"
+                            [value]="typeOfTraining._id">
+                            {{ typeOfTraining.name }}
+                        </ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <small class="text-error"
+                    *ngIf="form.get('typeOfTraining').invalid && (form.get('typeOfTraining').dirty || form.get('typeOfTraining').touched) ">
+                    Champ obligatoire
+                </small> -->
+
+                <ion-item class="custom-select w-100">
+                    <ion-label position="floating">Niveau d'études <span class="required">*</span></ion-label>
+                    <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                        formControlName="levelOfStudies">
+                        <ion-select-option *ngFor="let item of globalService.levelOfStudies" [value]="item._id">
+                            {{item.name}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <small class="text-error"
+                    *ngIf="form.get('levelOfStudies').invalid && (form.get('levelOfStudies').dirty || form.get('levelOfStudies').touched) ">
+                    Champ obligatoire
+                </small>
+
+                <ion-item class="custom-select w-100">
+                    <ion-label position="floating">Expérience <span class="required">*</span></ion-label>
+                    <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                        formControlName="experienceYears">
+                        <ion-select-option *ngFor="let experience of globalService.experiences"
+                            [value]="experience._id">
+                            {{ experience.name }}
+                        </ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <small class="text-error"
+                    *ngIf="form.get('experienceYears').invalid && (form.get('experienceYears').dirty || form.get('experienceYears').touched) ">
+                    Champ obligatoire
+                </small>
+                
+                <div class="text-right mt-2">
+                    <ion-button type="submit" [disabled]="languagesList.length <= 0
+                    || form.get('programingLanguages.logiciel').value?.length <= 0
+                    || form.get('programingLanguages.language').value?.length <= 0 || !form.valid">
+                        Enregistrer
+                    </ion-button>
+                </div>
+
+            </div>
+        </section>
+    </ion-content>
+</form>

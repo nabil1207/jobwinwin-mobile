@@ -1,0 +1,299 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons (click)="goBack()" class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <ion-buttons slot="primary">
+            <ion-button routerLink="/dashboard/settings">
+                <ion-icon slot="icon-only" ios="settings-outline" md="settings-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+        <ion-title>Profil candidat</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms" appScrollToTop>
+    <section class="condidate-card" >
+        <div class="page-content">
+
+            <ion-row class="mt-1 py-1">
+                <ion-col size="12">
+                    <!-- <ion-icon class="d-inline icon-blue-title mr-1" src="./assets/icon/apprentice.svg"></ion-icon> -->
+                    <span class="blue-title">Profil complété à :  </span>
+                </ion-col>
+                <ion-col size="12">
+                    <div class="progressbar w-100">
+                        <div class="porcent" [ngStyle]="{'width': (candidateService.percentage | async | number: '1.0-0') + '%'}">
+                            <div class="counter text-center">
+                                {{ candidateService.percentage | async | number: '1.0-0' }} %
+                             </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="progressbar w-100">
+                        <div class="porcent"
+                            [ngStyle]="{'width': (authService.user.candidate.percentage | number: '1.0-0') + '%'}">
+                            {{ authService.user.candidate.percentage | number: '1.0-0' }} %
+                        </div>
+                    </div> -->
+                </ion-col>
+            </ion-row>
+
+            <div class="condidate-profil">
+                <div class="d-block position-relative mr-auto pt-1" style="width: 120px">
+                    <img class="circle-image"
+                        [src]="authService.user.picture ? (('backend_url' | env) + authService.user.picture.name) : 
+                    (authService.user['gender'] === 'masculin' ? '/assets/img/male.svg' : '/assets/img/female.svg' )"
+                        alt="profil">
+                    <div class="change-photo" (click)="addImageAction()">
+                        <mat-icon color="primary">edit</mat-icon>
+                    </div>
+                </div>
+                <ion-row class="mt-1 py-1 pb-1">
+                    <ion-col size="12" class="text-center">
+                        <div class="name ml-1">{{ authService.user.firstName }} {{ authService.user.lastName }}</div>
+                    </ion-col>
+                    <ion-col size="12" class="text-center">
+                        <div class="post ml-1">{{ authService.user['currentJob'] }}</div>
+                    </ion-col>
+                </ion-row>
+            </div>
+
+            <div class="bg-light border-bottom px-1 py-2">
+                <p class="desciption text-center mb-1">
+                    {{ authService.user['goal'] }}
+                </p>
+                <div class="links cursor-pointer" (click)="editProfil()">
+                    Modifier profil
+                </div>
+            </div>
+
+            <div class="objectif bg-light">
+                <h3 class="title">OBJECTIF ACTUEL</h3>
+                <ion-row class="ion-justify-content-center mt-1 py-1">
+                    <ion-col size="12" class="text-center">
+                        <div class="info">{{ authService.user['searchedPost'] }} </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="12" class="text-center">
+                        <div class="info"> {{ objectifLocation }} </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center py-1 pb-1">
+                    <ion-col size="12" class="text-center">
+                        <div class="info">{{ authService.user['supposedSalaryMax'] }} DH</div>
+                    </ion-col>
+                </ion-row>
+                <div class="links cursor-pointer" (click)="editObjectif()">
+                    Modifier mon objectif
+                </div>
+            </div>
+
+            <div class="video bg-light border-bottom">
+                <h3 class="title">VIDÉO</h3>
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="11" class="text-center">
+                        <div *ngIf="authService.user['video'] else uploadVideo">
+                            <video width="100%" height="200px" controls>
+                                <source [src]="('backend_url' | env) + authService.user['video'].name">
+                            </video>
+                        </div>
+                        <ng-template #uploadVideo>
+                            <img class="w-100" src="./assets/img/default-video.svg" alt="Add Video">
+                        </ng-template>
+                    </ion-col>
+                    <ion-col size="1" class="ion-align-self-center">
+                        <mat-icon color="primary" (click)="editVideo()">edit</mat-icon>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <div class="experience bg-light border-bottom">
+                <h3 class="title">EXPÉRIENCES</h3>
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="text-center">
+                        <mat-icon color="primary">mediation</mat-icon>
+                    </ion-col>
+                    <ion-col size="9" class="ion-align-self-center">
+                        <span>Expérience : <br></span>
+                        <div class="exeprience-details" *ngFor="let experience of authService.user['experiences']">
+                            {{ experience.startedDate | date:'MM-yyyy' }} - 
+                            <span *ngIf="experience.endDate"> {{ experience.endDate | date:'MM-yyyy' }} :</span>
+                            <span *ngIf="!experience.endDate"> en cours :</span>
+                            {{ experience.job }}
+                        </div>
+                    </ion-col>
+                    <ion-col size="1" class="ion-align-self-center">
+                        <mat-icon color="primary" (click)="editExperience()">edit</mat-icon>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <div class="formation bg-light border-bottom">
+                <h3 class="title">FORMATIONS</h3>
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="text-center">
+                        <mat-icon color="primary">school</mat-icon>
+                    </ion-col>
+                    <ion-col size="9" class="ion-align-self-center">
+                        <span>Formations : </span>
+                        <div class="formation-details" *ngFor="let item of authService.user['trainings']">
+                            {{ item.yearOfGraduation }} :
+                            {{ item.name }}
+                        </div>
+                    </ion-col>
+                    <ion-col size="1" class="ion-align-self-center">
+                        <mat-icon color="primary" (click)="editFormation()">edit</mat-icon>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <div class="cv bg-light border-bottom">
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="text-center">
+                        <mat-icon color="primary" class="mr-1">article</mat-icon>
+                    </ion-col>
+                    <ion-col size="9" class="ion-align-self-center">
+                        <span>CV</span>
+                    </ion-col>
+                    <ion-col size="1" class="ion-align-self-center">
+                        <mat-icon color="primary" (click)="editCV()">edit</mat-icon>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <div class="langue bg-light">
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="text-center">
+                        <mat-icon color="primary" class="mr-1">g_translate</mat-icon>
+                    </ion-col>
+                    <ion-col size="9" class="ion-align-self-center">
+                        <span>LANGUE</span>
+                        <div *ngFor="let item of languages">
+                            {{ item.language.name }} :
+                            {{ item.languageLevel.name }}
+                        </div>
+                    </ion-col>
+                    <ion-col size="1" class="ion-align-self-center">
+                        <mat-icon color="primary" (click)="editLangue()">edit</mat-icon>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <div class="skils bg-light border-bottom pb-3">
+                <h3 class="title">SOFT SKILLS / VALEURS
+                    <mat-icon class="align-middle ml-1" color="primary" (click)="editSkils()">add</mat-icon>
+                </h3>
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="ion-align-self-center">
+                        <img src="./assets/icon/circle-linkedin.svg" alt="linkedin">
+                    </ion-col>
+                    <ng-container *ngIf="authService.user['linkedin'] else addLinkedIn">
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>{{authService.user['linkedin']}}</span>
+                        </ion-col>
+                    </ng-container>
+                    <ng-template #addLinkedIn>
+                        <ion-col size="9" class="ion-align-self-center">
+                            <span>Ajoutez un compte linkedin</span>
+                        </ion-col>
+                        <ion-col size="1" class="ion-align-self-center">
+                            <mat-icon color="primary" (click)="editLinks()">add</mat-icon>
+                        </ion-col>
+                    </ng-template>
+                </ion-row>
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="ion-align-self-center">
+                        <img src="./assets/icon/circle-blogger.svg" alt="blogger">
+                    </ion-col>
+                    <ng-container *ngIf="authService.user['blog'] else addBlog">
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>{{authService.user['blog']}}</span>
+                        </ion-col>
+                    </ng-container>
+                    <ng-template #addBlog>
+                        <ion-col size="9" class="ion-align-self-center">
+                            <span>Ajoutez un lien blog</span>
+                        </ion-col>
+                        <ion-col size="1" class="ion-align-self-center">
+                            <mat-icon color="primary" (click)="editLinks()">add</mat-icon>
+                        </ion-col>
+                    </ng-template>
+                </ion-row>
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="ion-align-self-center">
+                        <img src="./assets/icon/circle-website.svg" alt="website">
+                    </ion-col>
+                    <ng-container *ngIf="authService.user['webSite'] else addWebSite">
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>{{authService.user['webSite']}}</span>
+                        </ion-col>
+                    </ng-container>
+                    <ng-template #addWebSite>
+                        <ion-col size="9" class="ion-align-self-center">
+                            <span>Ajouter le lien de site web</span>
+                        </ion-col>
+                        <ion-col size="1" class="ion-align-self-center">
+                            <mat-icon color="primary" (click)="editLinks()">add</mat-icon>
+                        </ion-col>
+                    </ng-template>
+                </ion-row>
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="ion-align-self-center">
+                        <img src="./assets/icon/circle-instagram.svg" alt="instagram">
+                    </ion-col>
+                    <ng-container *ngIf="authService.user['instagram'] else addInstagram">
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>{{authService.user['instagram']}}</span>
+                        </ion-col>
+                    </ng-container>
+                    <ng-template #addInstagram>
+                        <ion-col size="9" class="ion-align-self-center">
+                            <span>Ajoutez un compte instagram</span>
+                        </ion-col>
+                        <ion-col size="1" class="ion-align-self-center">
+                            <mat-icon color="primary" (click)="editLinks()">add</mat-icon>
+                        </ion-col>
+                    </ng-template>
+                </ion-row>
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="ion-align-self-center">
+                        <img src="./assets/icon/circle-twitter.svg" alt="twitter">
+                    </ion-col>
+                    <ng-container *ngIf="authService.user['twitter'] else addTwitter">
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>{{authService.user['twitter']}}</span>
+                        </ion-col>
+                    </ng-container>
+                    <ng-template #addTwitter>
+                        <ion-col size="9" class="ion-align-self-center">
+                            <span>Ajoutez un compte twitter</span>
+                        </ion-col>
+                        <ion-col size="1" class="ion-align-self-center">
+                            <mat-icon color="primary" (click)="editLinks()">add</mat-icon>
+                        </ion-col>
+                    </ng-template>
+                </ion-row>
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="ion-align-self-center">
+                        <img src="./assets/icon/circle-facebook.svg" alt="facebook">
+                    </ion-col>
+                    <ng-container *ngIf="authService.user['facebook'] else addFacebook">
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>{{ authService.user['facebook'] }}</span>
+                        </ion-col>
+                    </ng-container>
+                    <ng-template #addFacebook>
+                        <ion-col size="9" class="ion-align-self-center">
+                            <span>Ajouter le compte facebook</span>
+                        </ion-col>
+                        <ion-col size="1" class="ion-align-self-center">
+                            <mat-icon color="primary" (click)="editLinks()">add</mat-icon>
+                        </ion-col>
+                    </ng-template>
+                </ion-row>
+
+                <div class="links cursor-pointer" (click)="editLinks()">
+                    Modifier vos réseau sociaux
+                </div>
+            </div>
+        </div>
+    </section>
+
+</ion-content>

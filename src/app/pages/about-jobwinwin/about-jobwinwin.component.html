@@ -1,0 +1,32 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons (click)="goBack()" class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <ion-title>A propos de jobwinwin</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="settings-content mb-3">
+        <div class="page-content">
+            <div class="d-block">
+
+                <ion-item lines="full" routerLink="/dashboard/contact-form" routerDirection="root">
+                    <ion-icon slot="start" src="/assets/icon/contact.svg" style="width: 20px; height: 20px;"></ion-icon>
+                    <ion-label> Nous contacter </ion-label>
+                  </ion-item>
+                  
+                <ion-item lines="full">
+                    <ion-icon slot="start" src="/assets/icon/condition.svg" style="width: 20px; height: 20px;">
+                    </ion-icon>
+                    <ion-label> Conditions d'utilisation</ion-label>
+                </ion-item>
+
+                <ion-item lines="full">
+                    <ion-icon slot="start" src="/assets/icon/regle.svg" style="width: 20px; height: 20px;"></ion-icon>
+                    <ion-label> Régles de communauté</ion-label>
+                </ion-item>
+            </div>
+        </div>
+    </section>
+</ion-content>

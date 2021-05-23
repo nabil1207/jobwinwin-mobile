@@ -1,0 +1,27 @@
+<div appScrollToTop>
+    <form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+        <div class="text-center mt-2">
+            <p> Vos softskills sont très importants pour les recruteurs.
+                Choisissez dans la liste les 5 softskills qui vous représentent le plus.
+            </p>
+        </div>
+        <app-multi-select label="Mes soft skills" [limit]="5" collection="softSkills" formControlName="skills">
+        </app-multi-select>
+        <div class="text-center mt-2">
+            <p>En recrutement une valeur est parfois plus
+                décisive qu’une compétence.
+                Renforcer la qualité de votre profil en
+                séléctionnant dans la liste les 6 valeurs qui vous
+                correspondent</p>
+        </div>
+        <app-multi-select label="Mes valeurs" [limit]="6" collection="values" formControlName="values">
+        </app-multi-select>
+
+        <div class="mt-2 text-center">
+            <ion-button type="submit" class="w-80" color="primary"
+                [disabled]="form.get('values').value?.length < 6 ||  form.get('skills').value?.length < 5 ? true : false">
+                Validez
+            </ion-button>
+        </div>
+    </form>
+</div>

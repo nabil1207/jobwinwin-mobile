@@ -1,0 +1,10 @@
+// export * from './add-profil/add-profil.component';
+// export * from './choose-profile/choose-profile.component';
+// export * from './experience/experience.component';
+// export * from './final-state/final-state.component';
+// export * from './info-plus/info-plus.component';
+// export * from './job-info/job-info.component';
+// export * from './personal-info/personal-info.component';
+// export * from './preview-profil/preview-profil.component';
+// export * from './upload-video/upload-video.component';
+// export * from './values/values.component';

@@ -1,0 +1,113 @@
+ion-button {
+  --border-radius: 50px !important;
+  --box-shadow: none !important;
+  height: 34px !important;
+  text-transform: none;
+  @include text-style(center, 13px, var(--ion-color-primary-contrast), bold);
+}
+.roundbutton {
+  background: var(--ion-color-secondary);
+  color: var(--ion-color-primary-contras);
+  display: inline-block;
+  vertical-align: middle;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 25px;
+  line-height: 41px;
+  width: 35px;
+  height: 35px;
+  font-size: 30px;
+  padding-right: 4px;
+  padding-top: 2px;
+}
+.button-preview {
+  width: 40px !important;
+  height: 40px !important;
+  color: var(--ion-color-secondary);
+  font-size: 11px !important;
+}
+.btn-outline {
+  height: 30px;
+  // width: 85px;
+  @include text-style(center, 10px, var(--ion-color-primary), 500);
+}
+.btn-outline-danger {
+  height: 30px;
+  width: 85px;
+  @include text-style(center, 10px, var(--ion-color-danger), 500);
+  border-color: var(--ion-color-danger) !important;
+}
+.btn-outline-upload {
+  height: 40px;
+  @include text-style(center, 14px, var(--ion-color-primary), 500);
+}
+.btn-win {
+  img {
+    width: 45px !important;
+  }
+}
+.change-photo {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: var(--ion-color-primary);
+  border-radius: 50px;
+  padding: 8px;
+  bottom: 5px;
+  right: 1em;
+  // 0666342992
+}
+.refreshBtn {
+  background-color: var(--ion-color-secondary) !important;
+  color: var(--ion-color-primary-contrast) !important;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  outline: none;
+}
+.deleteBtn {
+  background-color: var(--ion-color-primary-contrast) !important;
+  border-radius: 25px !important;
+  width: 95px;
+  height: 35px;
+  outline: none;
+}
+.winBtn {
+  background-color: var(--ion-color-secondary) !important;
+  border-radius: 25px !important;
+  width: 95px;
+  height: 35px;
+  outline: none;
+  color: #ffffff;
+}
+.favoriteBtn {
+  background-color: var(--ion-color-danger) !important;
+  color: var(--ion-color-primary-contrast) !important;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  outline: none;
+}
+.round-button {
+  background-color: var(--ion-color-primary-contrast) !important;
+  border-radius: 50%;
+  border: 1px solid var(--ion-color-primary);
+  width: 40px;
+  height: 40px;
+  padding-top: 5px;
+}
+
+.btn-parametre {
+  width: 70%;
+  height: 50px;
+  line-height:50px;
+  border-radius: 5px;
+  background: rgba(68, 92, 166, 0.3);
+  display: block;
+  margin: 0 auto 16px auto;
+  font-weight: normal;
+  font-size: 14px;
+  text-align: center;
+  color: #707070;
+}

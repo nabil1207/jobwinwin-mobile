@@ -1,0 +1,8 @@
+@mixin text-style($text-align: left, $size: 14px, $color: var(--ion-color-primary), $weight: 400, $letter-spacing: 0.02em, $line-height: unset) {
+  text-align: $text-align;
+  font-size: $size;
+  color: $color;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}

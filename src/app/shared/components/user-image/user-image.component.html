@@ -1,0 +1,13 @@
+<div [class.large]="large">
+  <div *ngIf="image; else userName">
+    <img [src]="'178.128.168.245:3000/' + image" alt="user_name">
+  </div>
+  <ng-template #userName>
+  <div class="userName">
+    <span>
+        {{ firstName | slice:0:1 | uppercase }}{{ lastName | slice:0:1 | uppercase }}
+    </span>
+  </div>
+  </ng-template>
+  
+</div>

@@ -1,0 +1,14 @@
+<mat-accordion class="custom-mat-accordion w-100">
+  <mat-expansion-panel>
+      <mat-expansion-panel-header class="pl-0">
+          <mat-panel-title>
+            {{ label }}
+          </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let item of rows; let i = index;" class="d-inline w-100">
+          <mat-checkbox [checked]="item.checked" [value]="item._id" (change)="onChangeValue(i, $event)">
+              {{ item.name }}
+          </mat-checkbox>
+      </div>  
+  </mat-expansion-panel>
+</mat-accordion>

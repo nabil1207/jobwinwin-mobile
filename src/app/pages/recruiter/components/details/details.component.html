@@ -1,0 +1,82 @@
+<div *ngIf="recruiter">
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons routerLink="/dashboard/recruiter" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <ion-buttons slot="primary">
+                <ion-button>
+                    <ion-icon slot="icon-only" ios="ellipsis-vertical" md="ellipsis-vertical"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+            <ion-title> {{recruiter.firstName }} {{ recruiter.lastName }} </ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="detail-mission-content">
+            <div class="d-block position-relative mr-auto mb-3 w-30" id="image-block">
+                <img [src]="recruiter.picture ? (('backend_url' | env) + recruiter.picture.name) : 
+                (recruiter.civility === 'Mr' ? '/assets/img/male.svg' : '/assets/img/female.svg' )" alt="">
+                <app-file-uploader [data]="value" (fileChanges)="fileChanges($event)"></app-file-uploader>
+            </div>
+            <div class="update-link text-right" (click)="editRecruiter()">
+                <span class="d-inline vertical-align">Modifier</span>
+                <mat-icon class="d-inline vertical-align float-right" color="primary">edit
+                </mat-icon>
+            </div>
+            <div class="d-block mt-1 w-100">
+                <div class="d-inline text-right align-middle w-30">
+                    <img class="mr-2" src="./assets/icon/profil-blue.svg" alt="profil" width="20px">
+                </div>
+                <div class="d-inline text-left w-60">
+                    <span>{{recruiter.firstName }} {{ recruiter.lastName }}</span>
+                    <!-- <mat-icon class="d-inline vertical-align float-right" color="primary" (click)="editRecruiter()">edit
+                    </mat-icon> -->
+                </div>
+            </div>
+
+            <div class="d-block mt-1 w-100">
+                <div class="d-inline text-right align-middle w-30">
+                    <mat-icon class="mr-2" color="primary" width="20px">work</mat-icon>
+                </div>
+                <div class="d-inline text-left w-60">
+                    <span>{{ recruiter.function }}</span>
+                    <!-- <mat-icon class="d-inline vertical-align float-right" color="primary" (click)="editRecruiter()">edit
+                    </mat-icon> -->
+                </div>
+            </div>
+            <div class="d-block mt-1 w-100">
+                <div class="d-inline text-right align-middle w-30">
+                    <mat-icon class="mr-2" color="primary" width="20px">admin_panel_settings</mat-icon>
+                </div>
+                <div class="d-inline text-left w-60">
+                    <span>Recruteur</span>
+                    <!-- <mat-icon class="d-inline vertical-align float-right" color="primary" (click)="editRecruiter()">edit
+                    </mat-icon> -->
+                </div>
+            </div>
+            <div class="d-block mt-1 w-100">
+                <div class="d-inline text-right align-middle w-30">
+                    <mat-icon class="mr-2" color="primary" width="20px">phone</mat-icon>
+                </div>
+                <div class="d-inline text-left w-60">
+                    <span>{{ recruiter.firstPhoneNumber }}</span>
+                    <!-- <mat-icon class="d-inline vertical-align float-right" color="primary" (click)="editRecruiter()">edit
+                    </mat-icon> -->
+                </div>
+            </div>
+            <div class="d-block mt-1 w-100" *ngIf="recruiter.secondPhoneNumber" >
+                <div class="d-inline text-right align-middle w-30">
+                    <mat-icon class="mr-2" color="primary" width="20px">phone</mat-icon>
+                </div>
+                <div class="d-inline text-left w-60">
+                    <span>{{ recruiter.secondPhoneNumber }}</span>
+                    <!-- <mat-icon class="d-inline vertical-align float-right" color="primary" (click)="editRecruiter()">edit
+                    </mat-icon> -->
+                </div>
+            </div>
+
+        </section>
+
+    </ion-content>
+</div>

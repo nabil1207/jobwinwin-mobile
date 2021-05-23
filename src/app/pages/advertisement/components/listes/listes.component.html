@@ -1,0 +1,100 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons (click)="goBack()" class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <ion-title>Annonces</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="steps-content">
+        <article class="page-content">
+
+            <form class="mb-1">
+                <div class="d-block">
+                    <div class="form-group position-relative d-inline w-100">
+                        <input class="custom-input search-input border-bleu" type="text" name="search"
+                            placeholder="Rechercher une annonce" [(ngModel)]="search" (ngModelChange)="onSearch()">
+                        <span class="icon-search position-absolute">
+                            <img src="./assets/icon/search.svg">
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+            <div class="text-center mb-1">
+                <ion-button class="light-color w-60"
+                    [routerLink]=" advertisementService.advertisements.length > 0  ? '/dashboard/advertisement/form/create-advertisement' : '/dashboard/advertisement/slider-advertisement'">
+                    <ion-icon name="add"></ion-icon>
+                    Ajouter une annonce
+                </ion-button>
+            </div>
+
+            <div class="d-block">
+                <!-- <div class="d-inline w-50 mt-1 text-left">
+                    <h2 class="annonce-title">Annonces</h2>
+                </div> -->
+
+                <div class="d-inline w-100 mt-1 text-right">
+                    <p class="recent-ads">Récent</p>
+                </div>
+            </div>
+
+            <ng-container *ngFor="let advertisement of advertisementService.advertisements">
+                <ion-row class="advertisement-detail w-100 mt-1"
+                [ngClass]="[advertisement.status === 'Ouverte' ? 'alert-valid' : '',  advertisement.status === 'En attente de validation' ? 'alert-attention' : '', advertisement.status === 'Close' ? 'alert-close' : '']">
+                    <ion-col size="10" class="ion-align-self-start">
+                        <div class="w-10" [ngClass]="{'animate__animated animate__tada animate__infinite infinite': advertisement.status === 'En attente de validation'}">
+                            <ion-icon class="status-annoce" *ngIf="advertisement.status === 'Ouverte'" name="checkmark-circle"></ion-icon>
+                            <ion-icon class="status-annoce" *ngIf="advertisement.status === 'En attente de validation'" name="alert-circle"></ion-icon>
+                            <ion-icon class="status-annoce" *ngIf="advertisement.status === 'Close'" name="close-circle"></ion-icon>
+                        </div>
+                        <div class="advertisement-data">
+                            <h2 class="advertisement-name">
+                                {{ advertisement.desiredJob }}
+                            </h2>
+                            <p class="city">{{ advertisement.location }}</p>
+                            <p class="salary">De {{ advertisement.supposedSalaryMin }} DH</p>
+                            <p class="salary">à {{ advertisement.supposedSalaryMax }} DH</p>
+                        </div>
+                    </ion-col>
+                    <ion-col size="2" class="ion-align-self-start">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" class="more-btn">
+                            <mat-icon>more_horiz</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" class="advertisement-menu">
+                            <button class="icon-menu-ads" mat-menu-item
+                                [routerLink]="['detail-profile', advertisement._id]">
+                                <img src="/assets/icon/statusAds.svg" alt="status">
+                                <span>Statut annonce</span>
+                            </button>
+                            <button class="icon-menu-ads" mat-menu-item
+                                [routerLink]="['detail-annonce', advertisement._id]">
+                                <img src="/assets/icon/updateAds.svg" alt="status">
+                                <span>Modifier annonce</span>
+                            </button>
+                                <button class="icon-menu-ads" mat-menu-item [routerLink]="['/dashboard']" [queryParams]="{advertismentId: advertisement._id}">
+                                <img src="/assets/icon/swipe.svg" alt="status">
+                                <span>Swipe & match</span>
+                            </button>
+    
+                        </mat-menu>
+                    </ion-col>
+                    <ion-col size="3" class="advertisement-info text-left">
+                        {{advertisement.views}} <br>
+                        Vues
+                    </ion-col>
+                    <ion-col size="3" class="advertisement-info text-left">
+                        {{ advertisement.wins }} <br>
+                        Wins
+                    </ion-col>
+                    <ion-col size="6" class="advertisement-info text-left">
+                        Édité le {{advertisement.updatedAt | date:'dd/MM'}}<br>
+                        {{ advertisement.recruiter.firstName }} {{ advertisement.recruiter.lastName }}
+                    </ion-col>
+                </ion-row>
+            </ng-container>
+        </article>
+    </section>
+
+</ion-content>

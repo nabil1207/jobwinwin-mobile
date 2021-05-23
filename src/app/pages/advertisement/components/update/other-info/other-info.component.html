@@ -1,0 +1,164 @@
+<form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons (click)="close()" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <ion-title>Autre information</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="steps-content">
+            <div class="page-content">
+                <div class="mt-1" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+
+                    <div fxLayout="column" fxFlex.xs="45%">
+                        <ion-item class="custom-select w-100">
+                            <ion-label position="floating">Type de contrat <span class="required">*</span></ion-label>
+                            <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                                formControlName="contract">
+                                <ion-select-option *ngFor="let item of globalService.contracts" [value]="item._id">
+                                    {{item.name}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('contract').invalid && (form.get('contract').dirty || form.get('contract').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+
+                    <div fxLayout="column" fxFlex.xs="45%">
+                        <ion-item class="custom-select w-100">
+                            <ion-label position="floating">Type de Poste <span class="required">*</span></ion-label>
+                            <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                                formControlName="jobType">
+                                <ion-select-option *ngFor="let item of globalService.jobTypes" [value]="item._id">
+                                    {{item.name}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('jobType').invalid && (form.get('jobType').dirty || form.get('jobType').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+
+                    <div fxLayout="column" fxFlex.xs="45%">
+                        <ion-item class="custom-select w-100">
+                            <ion-label position="floating">Mode de travail <span class="required">*</span></ion-label>
+                            <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                                formControlName="jobMode">
+                                <ion-select-option *ngFor="let item of globalService.jobModes" [value]="item._id">
+                                    {{item.name}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('jobMode').invalid && (form.get('jobMode').dirty || form.get('jobMode').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+                    <div fxLayout="column" fxFlex.xs="45%">
+                        <ion-item class="custom-select w-100">
+                            <ion-label position="floating">Poste basé à <span class="required">*</span></ion-label>
+                            <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                                formControlName="location">
+                                <ion-select-option *ngFor="let item of globalService.locations" [value]="item._id">
+                                    {{item.name}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('location').invalid && (form.get('location').dirty || form.get('location').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+                    <div fxLayout="column" fxFlex.xs="45%">
+                        <ion-item class="custom-select w-100">
+                            <ion-label position="floating">Niv. managérial <span class="required">*</span></ion-label>
+                            <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                                formControlName="managerialLevel">
+                                <ion-select-option *ngFor="let item of globalService.managerialLevels"
+                                    [value]="item._id">
+                                    {{item.name}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('managerialLevel').invalid && (form.get('managerialLevel').dirty || form.get('managerialLevel').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+
+                    <div fxLayout="column" fxFlex.xs="45%">
+                        <ion-item class="custom-select w-100">
+                            <ion-label position="floating">Effectif géré <span class="required">*</span></ion-label>
+                            <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                                formControlName="effective">
+                                <ion-select-option *ngFor="let effective of globalService.effectives"
+                                    [value]="effective._id">
+                                    {{ effective.name }}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('effective').invalid && (form.get('effective').dirty || form.get('effective').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+
+                </div>
+
+                <h4 class="pt-2">Salaire proposé (Dhs)</h4>
+                <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+                    <div class="w-100" fxLayout="column" fxFlex.xs="45%">
+                        <ion-item class="custom-input">
+                            <ion-label position="floating">À partir de <span class="required">*</span></ion-label>
+                            <ion-input type="number" formControlName="supposedSalaryMin"></ion-input>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('supposedSalaryMin').invalid && (form.get('supposedSalaryMin').dirty || form.get('supposedSalaryMin').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+
+                    <div class="w-100" fxLayout="column" fxFlex.xs="45%">
+                        <ion-item class="custom-input">
+                            <ion-label position="floating">Jusqu'à <span class="required">*</span></ion-label>
+                            <ion-input type="number" formControlName="supposedSalaryMax"></ion-input>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('supposedSalaryMax').invalid && (form.get('supposedSalaryMax').dirty || form.get('supposedSalaryMax').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+                </div>
+                <small class="text-error" *ngIf="form.get('supposedSalaryMax').touched && !form.get('supposedSalaryMax').hasError('required') 
+                && form.hasError('salaryErreur')">
+                    Le salaire maximum doit être supérieur au salaire minimum
+                </small>
+
+                <div class="w-100">
+                    <ion-item class="custom-input">
+                        <ion-label position="floating">Autres avantages</ion-label>
+                        <ion-input type="text" formControlName="otherAdvantage"></ion-input>
+                    </ion-item>
+                </div>
+
+                <div class="text-right mt-2">
+                    <ion-button type="submit" [disabled]="!form.valid">
+                        Enregistrer
+                    </ion-button>
+                </div>
+
+            </div>
+        </section>
+    </ion-content>
+</form>

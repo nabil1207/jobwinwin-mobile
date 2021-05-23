@@ -1,0 +1,35 @@
+<div class="d-block" appScrollToTop>
+
+    <div class="text-center mt-2" *ngIf="(candidateService.percentage | async | number: '1.0-0')">
+        <p>
+            Votre profil est complet à  {{ candidateService.percentage | async | number: '1.0-0' }} %.<br>
+            Vous pouvez désormais swiper et rencontrer des recruteurs! 
+        </p>
+    </div>
+
+    <div class="text-center mt-1">
+        <p class="px-0">Complétez votre profil pour mieux matcher avec les recruteurs.</p>
+        <p class="px-0">Avec jobwinwin trouver le job qui vous correspond ! </p>
+    </div>
+
+    <!-- <div class="progressbar mt-3">
+        <div class="porcent" [ngStyle]="{'width': (candidateService.percentage | async | number: '1.0-0') + '%'}">
+            {{ candidateService.percentage | async | number: '1.0-0' }} %
+        </div>
+    </div> -->
+
+   
+
+    <div class="mt-3 text-center">
+        <ion-button class="w-80" color="primary" (click)="previewProfil()">
+            Prévisualisez votre profil
+        </ion-button>
+    </div>
+
+    <div class="mt-1 text-center">
+        <ion-button class="btn-win w-80" color="primary" (click)="onClear()">
+            <img src="./assets/icon/win-btn.svg" alt="">
+        </ion-button>
+    </div>
+
+</div>

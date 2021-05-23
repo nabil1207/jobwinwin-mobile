@@ -1,0 +1,58 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons routerLink="/dashboard/advertisement" routerDirection="root" class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <ion-title>Annonces</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="steps-content">
+        <article class="page-content">
+
+            <ion-slides pager="true">
+
+                <ion-slide>
+                    <div class="slide">
+                        <img src="./assets/img/slide1.jpg" />
+                        <h2>Créer votre première annonce</h2>
+                        <p>
+                            En quelques minutes seulement, vous pouvez mettre en ligne votre annonce! Grace à son
+                            algorithme performant, jobwinwin vous présentera des profils adaptés à vos besoins.
+                        </p>
+                    </div>
+                </ion-slide>
+
+                <ion-slide>
+                    <img src="./assets/img/slide2.jpg" />
+                    <h2>Remplir le formulaire</h2>
+                    <p>
+                        Il vous suffit de renseigner tous les éléments de l'annonce. Quelques éléments sont obligatoires
+                        pour nous permettre de sélectionner les candidats qui correspondent le mieux à vos attentes. Vous
+                        pourrez à tout moment, modifier ces informations.
+                    </p>
+                </ion-slide>
+
+                <ion-slide>
+                    <img src="./assets/img/slide3.jpg" />
+                    <h2>Validation de votre annonce</h2>
+                    <p>
+                        Une fois votre annonce créée, elle apparaîtra en statut "en cours de validation". Une
+                        notification sera envoyée au responsable de votre entité pour une validation.Vous pourrez
+                        ensuite commencer à matcher avec des candidats!
+                    </p>
+                </ion-slide>
+
+            </ion-slides>
+
+        </article>
+        <div class="text-center mt-2 mb-3">
+            <ion-button class="light-color w-80" routerLink="/dashboard/advertisement/form/create-advertisement"
+                routerDirection="root">
+                <ion-icon name="add"></ion-icon>
+                Ajouter une annonce
+            </ion-button>
+        </div>
+    </section>
+
+</ion-content>

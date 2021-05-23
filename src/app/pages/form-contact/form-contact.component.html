@@ -1,0 +1,33 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons routerLink="/dashboard/about" routerDirection="root"class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <ion-title>Contact</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="steps-content">
+        <div class="page-content">
+            <form [formGroup]="form" (ngSubmit)="onSave()">
+                <div class="d-block">
+                    <div class="w-100">
+                        <ion-item class="custom-input">
+                            <ion-label position="floating">Objet <span class="required">*</span></ion-label>
+                            <ion-input type="text" formControlName="subject"></ion-input>
+                        </ion-item>
+                    </div>
+    
+                    <div class="w-100">
+                        <ion-item class="custom-input">
+                            <ion-label position="floating">Message <span class="required">*</span></ion-label>
+                            <ion-textarea placeholder="Taper votre message" formControlName="message">
+                            </ion-textarea>
+                        </ion-item>
+                    </div>
+                    <ion-button class="mt-2 d-block ml-auto w-40" type="submit" [disabled]="!form.valid"> Envoyer </ion-button>
+                </div>
+            </form>
+        </div>
+    </section>
+</ion-content>

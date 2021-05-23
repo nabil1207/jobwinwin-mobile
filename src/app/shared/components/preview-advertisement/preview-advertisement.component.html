@@ -1,0 +1,260 @@
+<ion-content class="content-files" fxLayout="row" fxLayoutAlign="center center" *ngIf="advertisement">
+  <mat-horizontal-stepper [@.disabled]="true" class="file-mat-horizontal-stepper">
+
+    <mat-step>
+      <section class="file-card">
+        <header>
+          <ion-button (click)="modalController.dismiss()" color="secondary" class="button-preview">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+          </ion-button>
+          <h2 class="text-center">{{ advertisement.company.name }}</h2>
+          <div class="d-block text-center">
+            <img src="./assets/icon/space-title.svg" alt="">
+            <p class="short-desc">
+              {{ advertisement.company.title }}
+            </p>
+            <img src="./assets/icon/space-title.svg" alt="">
+            <div class="profil-files">
+              <img
+                [src]="advertisement.company.logo ? ('backend_url' | env) + advertisement.company.logo.name : '/assets/img/default-image.svg'"
+                alt="" class="w-100 circle-image">
+            </div>
+          </div>
+        </header>
+
+        <div class="position-relative">
+          <button mat-button class="bg-transparent position-absolute arrow-right cursor-pointer" matStepperNext><img
+              src="./assets/icon/arrow-right.svg" alt=""></button>
+
+          <div class="custom-fields text-center">
+            <div class="d-inline capitalize min-w-50">{{advertisement.desiredJob}}</div>
+          </div>
+
+          <div class="custom-fields text-center">
+            <!-- style="min-height: 50px;vertical-align: bottom;" -->
+            <div class="d-inline capitalize w-50 text-center mr-1">{{ advertisement.activitySector }}</div>
+            <div class="d-inline capitalize w-50 text-center pt-1">{{
+              advertisement.location }}</div>
+          </div>
+
+          <div class="custom-fields text-center">
+            <div class="d-inline capitalize w-80 text-center">{{ advertisement.experienceYears}} d’expérience</div>
+          </div>
+          <div class="custom-fields text-center">
+            <div class="d-inline capitalize w-80 text-center">{{ advertisement.supposedSalaryMin }} MAD</div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </mat-step>
+
+    <mat-step>
+
+      <section class="file-card">
+        <header>
+          <ion-button (click)="modalController.dismiss()" color="secondary" class="button-preview">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+          </ion-button>
+          <h2 class="text-center">{{ advertisement.company.name }}</h2>
+          <div class="d-block text-center">
+            <img src="./assets/icon/space-title.svg" alt="">
+            <p class="short-desc">
+              {{ advertisement.company.title }}
+            </p>
+            <img src="./assets/icon/space-title.svg" alt="">
+            <div class="profil-files">
+              <img
+                [src]="advertisement.company.logo ? ('backend_url' | env) + advertisement.company.logo.name : '/assets/img/default-image.svg'"
+                alt="" class="w-100 circle-image">
+            </div>
+          </div>
+        </header>
+        <div class="position-relative">
+          <button mat-button class="bg-transparent position-absolute arrow-left cursor-pointer" matStepperPrevious><img
+              src="./assets/icon/arrow-left.svg" alt=""></button>
+          <button mat-button class="bg-transparent position-absolute arrow-right cursor-pointer" matStepperNext><img
+              src="./assets/icon/arrow-right.svg" alt=""></button>
+          <div class="text-center job-title">
+            <span> {{ advertisement.desiredJob }}</span>
+          </div>
+
+          <div class="file-card-details mt-2">
+            <h3 class="title">
+              <img src="./assets/icon/mission-generale.svg" alt="" width="30px">
+              <span>Mission Générale</span>
+            </h3>
+            <div class="desc-candidate">
+              {{ advertisement.missions }}
+            </div>
+          </div>
+
+          <div class="file-card-details mt-1">
+            <h3 class="title">
+              <img src="./assets/icon/Taches.svg" alt="" width="30px">
+              <span>Descriptif de poste</span>
+            </h3>
+            <div class="desc">
+              <ul class="list">
+                <li *ngFor="let description of advertisement.descriptions">
+                  {{ description }}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="file-card-details mt-1">
+            <h3 class="title">
+              <img src="./assets/icon/Profil2.svg" alt="" width="30px">
+              <span>Prérequis</span>
+            </h3>
+            <span class="desc">
+              <ul class="list">
+                <li> {{ advertisement.prerequisite }} </li>
+              </ul>
+
+              <h5 class="text-center">
+                <strong>Niveau d'études</strong>
+              </h5>
+              <ul class="list">
+                <li> {{ advertisement.levelOfStudie }} </li>
+              </ul>
+
+
+              <h5 class="text-center">
+                <strong>Diplôme requis</strong>
+              </h5>
+              <ul class="list" *ngFor="let item of advertisement.typeOfTraining" >
+                <li> {{ item }} </li>
+              </ul>
+
+              <h5 class="text-center">
+                <strong>Langue</strong>
+              </h5>
+              <ul class="list">
+                <li *ngFor="let item of advertisement.languages">
+                  {{ item.language }} : {{ item.languageLevel }}
+                </li>
+              </ul>
+              <h5 class="text-center">
+                <strong>Compétences informatiques</strong>
+              </h5>
+              <ul class="list" id="programming-languages">
+                <li *ngFor="let item of advertisement.programingLanguages.language"> {{ item }} </li>
+                <li *ngFor="let item of advertisement.programingLanguages.logiciel"> {{ item }} </li>
+              </ul>
+            </span>
+          </div>
+
+          <div class="file-card-details mt-2">
+            <h3 class="title">
+              <img src="./assets/icon/Taches.svg" alt="" width="30px">
+              <span>Autres informations</span>
+            </h3>
+            <span class="desc">
+              <ul class="list">
+                <li *ngIf="advertisement.contract">Type de contrat : {{ advertisement.contract }} </li>
+                <li *ngIf="advertisement.jobType">Type de poste : {{ advertisement.jobType }} </li>
+                <li *ngIf="advertisement.jobMode">Mode de travail : {{ advertisement.jobMode }} </li>
+                <li *ngIf="advertisement.managerialLevel">Niv. managérial : {{ advertisement.managerialLevel }} </li>
+                <li *ngIf="advertisement.effective">Effectif géré : {{ advertisement.effective }}</li>
+              </ul>
+            </span>
+          </div>
+
+          <div class="file-card-details mt-1">
+            <h3 class="title">
+              <img src="./assets/icon/calendar.png" alt="" width="30px">
+              <span>Date prise de fonction</span>
+            </h3>
+            <span class="desc">
+              <strong>Le {{ advertisement.startedDate | date : 'dd/MM/yyyy' }}</strong>
+            </span>
+          </div>
+
+        </div>
+
+      </section>
+
+    </mat-step>
+
+    <mat-step>
+      <article class="file-card-values file-card-condidate">
+        <div style="padding: 1em">
+
+          <header>
+            <ion-button (click)="modalController.dismiss()" color="secondary" class="button-preview">
+              <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-button>
+            <h2 class="text-center">{{ advertisement.company.name }}</h2>
+          </header>
+
+          <div class="top-content text-center w-100 mt-2 mb-4">
+            <h3 class="text-center yellow-text uppercase">présentation générale</h3>
+            <p>
+              {{ advertisement.company.description }}
+            </p>
+          </div>
+
+          <div class="position-relative">
+            <button mat-button class="bg-transparent position-absolute arrow-left cursor-pointer" matStepperPrevious>
+              <img src="./assets/icon/arrow-left-black.svg" alt=""></button>
+          </div>
+        </div>
+
+
+        <div class="yellow-text text-center mb-3">
+          <h3 class="uppercase">Nos valeurs</h3>
+        </div>
+
+        <div class="circle-content position-relative" *ngIf="advertisement && advertisement.company.values">
+          <div class="d-block value-one">
+            <div class="text-content">{{ advertisement.company.values[0] ? advertisement.company.values[0] : ''}}
+            </div>
+          </div>
+          <div class="d-block value-two">
+            <div class="text-content">{{ advertisement.company.values[1] ? advertisement.company.values[1] : ''}}
+            </div>
+          </div>
+          <div class="d-block value-three">
+            <div class="text-content">{{ advertisement.company.values[2] ? advertisement.company.values[2] : ''}}
+            </div>
+          </div>
+          <div class="d-block value-four">
+            <div class="text-content">{{ advertisement.company.values[3] ? advertisement.company.values[3] : ''}}
+            </div>
+          </div>
+          <div class="d-block value-five">
+            <div class="text-content">{{ advertisement.company.values[4] ? advertisement.company.values[4] : ''}}
+            </div>
+          </div>
+        </div>
+
+        <div class="more-content">
+
+          <div class="custom-fields info-recruteur-title text-center mb-2" *ngIf="advertisement.company.webSite">
+            <a [href]=" advertisement.company.webSite" target="_blank">
+              <span>{{ advertisement.company.webSite }}</span>
+            </a>
+          </div>
+
+          <div class="social-media text-center">
+            <a [href]="advertisement.company.facebook" target="_blank" *ngIf="advertisement.company.facebook"><img
+                class="mr-1 inline-block cursor-pointer" src="./assets/icon/circle-facebook.svg" alt="facebook"></a>
+            <a [href]="'https://www.instagram.com/'+ advertisement.company.instagram" target="_blank"
+              *ngIf="advertisement.company.instagram"> <img class="mr-1 inline-block cursor-pointer"
+                src="./assets/icon/circle-instagram.svg" alt="instagram"></a>
+            <a [href]="advertisement.company.linkedin" target="_blank" *ngIf="advertisement.company.linkedin"><img
+                class="mr-1 inline-block cursor-pointer" src="./assets/icon/circle-linkedin.svg" alt="linkedin"></a>
+            <a [href]="'https://www.twitter.com/'+ advertisement.company.twitter" target="_blank"
+              *ngIf="advertisement.company.twitter"><img class="mr-1 inline-block cursor-pointer"
+                src="./assets/icon/circle-twitter.svg" alt="twitter"></a>
+          </div>
+
+        </div>
+      </article>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</ion-content>

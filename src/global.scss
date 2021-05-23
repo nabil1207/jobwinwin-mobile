@@ -1,0 +1,210 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+// @import "../node_modules/ng-multiselect-dropdown/themes/ng-multiselect-dropdown.theme.scss";
+
+@import "./scss/mixins";
+@import "./scss/global";
+@import "./scss/custom";
+@import "./scss/media-query";
+@import "./scss/partials/button";
+@import "./scss/partials/input";
+@import "./scss/partials/radioButton";
+@import "./scss/partials/card";
+@import "./scss/partials/progress-bar";
+@import "./scss/partials/checkbox";
+
+ion-header {
+  padding-top: 16px !important;
+}
+ion-datetime , ion-item.custom-static-input {
+  padding-left: 0px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  font-size: 14px;
+}
+ion-select {
+  padding-left: 0px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  font-size: 14px;
+}
+.action-sheet-group.sc-ion-action-sheet-md:last-child {
+  padding-bottom: 3em;
+}
+video {
+  display: block;
+  margin: auto;
+}
+
+ion-toolbar {
+  ion-title {
+    line-height: 30px !important;
+  }
+}
+
+ion-item.custom-select,
+ion-item.custom-datetime,
+ion-item.custom-input,
+ion-item.custom-checkbox,
+ion-item.custom-static-input {
+  --ion-safe-area-right: 0 !important;
+  --ion-safe-area-left: 0 !important;
+}
+
+ion-item.custom-checkbox {
+  > ion-label {
+    font-size: 13px !important;
+  }
+}
+ion-item.custom-input {
+  font-size: inherit !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
+  line-height: 20px !important;
+  position: relative;
+  > ion-label {
+    --color: #868686 !important;
+  }
+  > {
+    ion-icon {
+      position: absolute;
+      right: 0;
+      bottom: 5px;
+      z-index: 9;
+    }
+  }
+}
+ion-item.custom-input.item-has-focus {
+  --highlight-background: var(--ion-color-primary);
+}
+
+ion-item {
+  --ripple-color: transparent !important;
+}
+
+ion-range {
+  --knob-size: 40px;
+}
+
+mat-expansion-panel {
+  box-shadow: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.13) !important;
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  .mat-expansion-panel-body {
+    padding: 0 0 16px !important;
+  }
+}
+
+.custom-mat-accordion {
+  .mat-ripple {
+    display: none;
+  }
+  .mat-expansion-panel-header {
+    padding-right: 2px !important;
+    margin-top: 6px;
+    .mat-expansion-panel-header-title {
+      font-size: 13px;
+      padding-top: 5px;
+    }
+  }
+}
+
+.customToast {
+  --ion-safe-area-top: 2em !important;
+}
+
+.alert-wrapper {
+  max-width: unset !important;
+  width: 90% !important;
+}
+
+.mat-horizontal-stepper-header-container {
+  display: none !important;
+}
+
+.colorPrimary {
+  --background: var(--ion-color-primary);
+}
+
+mat-step-header {
+  display: none !important;
+}
+
+.mat-horizontal-content-container {
+  padding: 0 !important;
+}
+
+.scroll-content {
+  padding-bottom: 0 !important;
+}
+
+.swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+  background: #8eaaff;
+}
+
+.swiper-pagination-bullet-active {
+  width: 16px !important;
+  height: 16px !important;
+  background: var(--ion-color-primary);
+}
+
+.swiper-container-horizontal
+  > .swiper-pagination-bullets
+  .swiper-pagination-bullet {
+  vertical-align: middle !important;
+}
+
+.swiper-container-autoheight,
+.swiper-container-autoheight .swiper-slide {
+  height: auto !important;
+}
+
+.display-none {
+  display: none;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.dropdown-btn {
+  border : none !important;
+  border-bottom: 1px solid #adadad !important;
+  padding: 6px 12px 6px 0!important;
+  border-radius: 0 !important;
+  outline: none;
+  &:focus { outline: 0 !important; } 
+}
+
+.notification-class {
+  --min-width : 85%;
+}

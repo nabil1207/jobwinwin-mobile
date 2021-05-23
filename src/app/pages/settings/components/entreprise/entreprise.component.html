@@ -1,0 +1,89 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons (click)="modalController.dismiss()" routerDirection="root" class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <!-- <ion-buttons slot="end">
+            <ion-button>
+                Enregistrer
+            </ion-button>
+        </ion-buttons> -->
+        <ion-title>Informations entreprise</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="steps-content">
+        <div class="page-content">
+            <form class="d-block" [formGroup]="form">
+                <mat-form-field class="w-100">
+                    <mat-label>Nom de l’entreprise</mat-label>
+                    <input type="type" matInput value="Fairmont royal palm marrakech" formControlName="name">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <mat-label>Nom du responsable</mat-label>
+                    <input type="text" matInput value="yasmine" formControlName="managerLastName">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <mat-label>Prénom</mat-label>
+                    <input type="text" matInput value="jtioui" formControlName="managerFirstName">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <mat-label>Titre</mat-label>
+                    <input type="text" matInput value="Hotellerie" formControlName="title">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <mat-label>Adresse email</mat-label>
+                    <input type="email" matInput value="Fairmont.marrakaech@contact.com" formControlName="email">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <mat-label>Adresse postale</mat-label>
+                    <input type="text" matInput value="40130" formControlName="zipCode">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <mat-label>Ville / entreprise</mat-label>
+                    <input type="text" matInput formControlName="city">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <mat-label>Pays</mat-label>
+                    <input type="text" matInput formControlName="country">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <mat-label>RC</mat-label>
+                    <input type="text" matInput value="7845103269" formControlName="rc">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <mat-label>IF</mat-label>
+                    <input type="text" matInput value="700364981" formControlName="taxIdentification">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <mat-label>ICE</mat-label>
+                    <input type="text" matInput value="145967236541208" formControlName="ice">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <mat-label>Télephone portable</mat-label>
+                    <input type="tel" matInput value="555-555-1234" formControlName="phoneNumber">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <mat-label>Secteur d’activité</mat-label>
+                    <mat-select matNativeControl formControlName="activitySector">
+                        <mat-option *ngFor="let activitySector of globalService.activitySectors" [value]="activitySector._id"> 
+                            {{ activitySector.name }} 
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </div>
+    </section>
+</ion-content>

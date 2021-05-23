@@ -1,0 +1,96 @@
+.form-group {
+  margin: 10px 0;
+  position: relative !important;
+  .icon-password {
+    position: absolute !important;
+    top: 6px;
+    right: 12px;
+    width: 30px;
+    height: 30px;
+    img {
+      width: 20px;
+      padding: 5px;
+    }
+  }
+  .icon-search {
+    left: 16px;
+    top: 12px;
+  }
+  .custom-input {
+    @include text-style(left, 13px, var(--ion-color-dark), normal);
+    border-radius: 25px !important;
+    border: 1px solid var(--ion-color-medium) !important;
+    height: 35px !important;
+    padding: 10px 15px !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .custom-textarea {
+    border-radius: 25px !important;
+    border: 1px solid var(--ion-color-medium) !important;
+    min-height: 40px !important;
+    padding: 10px 15px !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .verify-number {
+    @include text-style(
+      center,
+      40px,
+      var(--ion-color-primary),
+      normal,
+      0.02em,
+      50px
+    );
+    margin: 0 5px;
+    border: none;
+    border-bottom: 3px solid rgba(68, 92, 166, 0.3);
+    outline: none;
+    width: 15%;
+    transition: all 0.2s ease-in-out;
+    &:focus {
+      border-bottom: 3px solid var(--ion-color-primary);
+    }
+  }
+  .search-input {
+    padding-left: 40px !important;
+    border: 1px solid var(--ion-color-primary) !important;
+  }
+}
+input:focus {
+  outline: none;
+}
+textarea:focus {
+  outline: none;
+}
+.custom-phone-input {
+  ion-input{
+    // background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="30"><text x="5" y="23" style="font-size: 14px;">+212</text></svg>')
+    //   no-repeat;
+    // // padding-top: 5px !important;
+    margin: 5px 0 !important;
+    box-sizing: border-box;
+    // padding-left: 45px !important;
+    height: 30px;
+  }
+}
+mat-form-field {
+  line-height: 20px !important;
+}
+
+.upload-cv {
+  mat-label {
+    @include text-style(left, 18px, var(--ion-color-dark), normal);
+  }
+  input {
+    @include text-style(left, 10px, #858585, normal);
+  }
+}
+.round-button {
+  background-color: var(--ion-color-primary-contrast) !important;
+  border-radius: 50%;
+  border: 1px solid var(--ion-color-primary);
+  width: 40px;
+  height: 40px;
+  padding-top: 5px;
+}

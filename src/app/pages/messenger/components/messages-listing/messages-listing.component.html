@@ -1,0 +1,58 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons (click)="goBack()" class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <ion-title>Messages</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="settings-content mb-3">
+        <div class="page-content py-1">
+            <form class="d-block">
+                <div class="form-group d-block w-90 mr-auto">
+                    <input class="custom-input search-input border-bleu" type="text" name="search" [(ngModel)]="search"
+                        placeholder="Rechercher">
+                    <span class="icon-search position-absolute">
+                        <img src="./assets/icon/search.svg">
+                    </span>
+                </div>
+            </form>
+            <ion-list>
+                <!-- <ion-list-header>
+                    Messages
+                </ion-list-header> -->
+                <ion-item class="messagerie" lines="none" *ngFor="let item of messages | filter:search" >
+                    <ion-avatar slot="start">
+                        <img [src]="item.user.picture ? (('backend_url' | env) + item.user.picture) : 
+                        (item.user.civility === 'Mr' || item.user.gender === 'masculin' ? '/assets/img/male.svg': '/assets/img/female.svg' )">
+                    </ion-avatar>
+                    <ion-label (click)="openConversation(item._id)">
+                        <h2>{{ item.user.firstName + ' ' + item.user.lastName}}</h2>
+                        <p class="last-msg">
+                            {{ (item.message.length > 25)? (item.message | slice:0:25) + '...' : (item.message) }}
+                            <span class="msg-date">{{ item.createdAt | date:'dd/MM/yyyy' }}</span>
+                        </p>
+                    </ion-label>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" class="more-btn-win">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item *ngIf="authService.user.userRole != 'Candidate'"  (click)="showCandidate(item.user._id)">
+                            <span>Voir le profil</span>
+                        </button>
+                        <button mat-menu-item *ngIf="authService.user.userRole === 'Candidate'"  (click)="showAdvertissement(item.advertisement)">
+                            <span>Voir le profil</span>
+                        </button>
+                        <button mat-menu-item>
+                            <span>Signaler</span>
+                        </button>
+                        <button mat-menu-item>
+                            <span>Effacer</span>
+                        </button>
+                    </mat-menu>
+                </ion-item>
+            </ion-list>
+        </div>
+    </section>
+</ion-content>

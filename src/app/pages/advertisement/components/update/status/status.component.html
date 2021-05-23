@@ -1,0 +1,36 @@
+<form class="d-block" [formGroup]="form" (ngSubmit)="changeStatus()">
+  <ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+      <ion-buttons (click)="close()" routerDirection="root" class="roundbutton" slot="start">
+        <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+      </ion-buttons>
+      <ion-title>Statut</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true" class="forms">
+    <section class="steps-content">
+      <div class="page-content">
+        <ion-item class="custom-select w-100">
+          <ion-label position="floating">Statut <span class="required">*</span></ion-label>
+          <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+            formControlName="status">
+            <ion-select-option value="En attente de validation">
+              En attente de validation
+            </ion-select-option>
+            <ion-select-option value="Ouverte">
+              Publiée
+            </ion-select-option>
+            <ion-select-option value="Close">
+              Close
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="text-right mt-2">
+          <ion-button type="ngSubmit" [disabled]="!form.valid">
+            Enregistrer
+          </ion-button>
+      </div>
+      </div>
+    </section>
+  </ion-content>
+</form>

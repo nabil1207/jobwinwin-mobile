@@ -1,0 +1,26 @@
+<form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons (click)="close()" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <ion-title>Date prise de poste</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="steps-content">
+            <div class="page-content">
+                <ion-item class="custom-datetime w-100">
+                    <ion-label position="floating">Date de prise de poste</ion-label>
+                    <ion-datetime placeholder="Sélectionner" formControlName="startedDate">
+                    </ion-datetime>
+                </ion-item>
+                <div class="text-right mt-2">
+                    <ion-button type="submit" [disabled]="!form.valid">
+                        Enregistrer
+                    </ion-button>
+                </div>
+            </div>
+        </section>
+    </ion-content>
+</form>

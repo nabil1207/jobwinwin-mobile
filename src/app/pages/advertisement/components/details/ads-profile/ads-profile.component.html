@@ -1,0 +1,65 @@
+<ng-container *ngIf="advertisementService.advertisement">
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons routerLink="/dashboard/advertisement" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <ion-buttons slot="primary">
+                <ion-button>
+                    <ion-icon slot="icon-only" ios="ellipsis-vertical" md="ellipsis-vertical"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+            <ion-title>Annonces</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="detail-mission-content">
+            <div class="d-block text-center mb-3 w-100">
+                <h1 class="title title-border capitalize w-80"> {{ advertisementService.advertisement.desiredJob }} </h1>
+                <img [src]="authService.user.company.logo ? (('backend_url' | env) + authService.user.company.logo.name) : './assets/img/default-image.svg'"
+                    alt="profil Annonce" class="image-circle">
+            </div>
+
+            <div class="d-block mt-1 w-100">
+                <div class="d-inline text-right align-middle w-30">
+                    <img class="mr-2" src="./assets/icon/calender.svg" alt="calendar" width="20px">
+                </div>
+                <div class="d-inline text-left w-60">
+                    <span>Édité le {{ advertisementService.advertisement.updatedAt | date: 'dd/MM' }}</span>
+                </div>
+            </div>
+            <div class="d-block mt-1 w-100">
+                <div class="d-inline text-right align-middle w-30">
+                    <img class="mr-2" src="./assets/icon/win-blue.svg" alt="Win" width="20px">
+                </div>
+                <div class="d-inline text-left w-60">
+                    <span>{{ advertisementService.advertisement.wins }} wins</span>
+                </div>
+            </div>
+            <div class="d-block mt-1 w-100">
+                <div class="d-inline text-right align-center w-30">
+                    <img class="mr-2" src="./assets/icon/status.svg" alt="status" width="20px">
+                </div>
+                <div class="d-inline text-left w-60">
+                    <span>Statut de l’annonce : <br>{{ advertisementService.advertisement.status }} <mat-slide-toggle class="align-middle" color="primary" [(ngModel)]="isChecked" (click)="changeStatus()"></mat-slide-toggle></span>
+                </div>
+                <!-- <div class="d-inline text-left w-60">
+                    <span>Statut : {{ advertisementService.advertisement.status }}</span>
+                </div> -->
+            </div>
+            <div class="d-block mt-1 w-100">
+                <div class="d-inline text-right align-middle w-30">
+                    <img class="mr-2" src="./assets/icon/recruiter.svg" alt="recruiter" width="20px">
+                </div>
+                <div class="d-inline text-left w-60" *ngIf="advertisementService.advertisement.recruiter || advertisementService.advertisement.recruiter" >
+                    <span class="d-inline vertical-align mr-2">
+                        {{ advertisementService.advertisement.recruiter.firstName }}
+                        {{ advertisementService.advertisement.recruiter.lastName }}
+                    </span>
+                </div>
+            </div>
+
+        </section>
+
+    </ion-content>
+</ng-container>

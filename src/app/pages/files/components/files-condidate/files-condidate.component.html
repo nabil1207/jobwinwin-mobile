@@ -1,0 +1,369 @@
+<ion-header class="header-card-matching ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button>
+                <ion-icon src="./assets/icon/menu-icon.svg" style="width: 60px;height: 60px;">
+                </ion-icon>
+            </ion-menu-button>
+        </ion-buttons>
+        <ion-buttons slot="primary">
+            <ion-button (click)="presentNotification($event)"
+                class="animate__animated animate__swing animate__repeat-3">
+                <ion-icon color="primary" name="notifications-outline"></ion-icon>
+                <span class="countNotif"  *ngIf="notifService.countNotif > 0">
+                    {{ notifService.countNotif }}
+                </span>
+            </ion-button>
+            <ion-button routerLink="/dashboard/messenger" routerDirection="root">
+                <ion-icon src="./assets/icon/notification.svg"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <!-- <div class="text-center">
+        <img src="./assets/icon/swipe.svg" alt="" style="width: 23px">
+        <p class="how-to-use">
+            Swipez, Matchez et Rencontrez-vous !
+        </p>
+    </div> -->
+    <ng-container *ngIf="advertisements && advertisements.length else notFound">
+        <section #matchingCard *ngFor="let advertisement of advertisements" class="content-card-matching"
+            [style.position]="'absolute'">
+            <ng-container *ngIf="advertisements">
+                <mat-horizontal-stepper class="card-matching m-1" [@.disabled]="true">
+                    <mat-step>
+                        <div class="card-matching-step card-info">
+                            <h3 class="title"> {{ advertisement.companyName }} </h3>
+                            <div class="d-block text-center position-relative">
+                                <img src="./assets/icon/space-title.svg" alt="">
+                                <p class="desciption mb-0">
+                                    {{ advertisement.companyTitle }}
+                                </p>
+                                <img src="./assets/icon/space-title.svg" alt="">
+                                <div class="picture-card-matching mt-1">
+                                    <img [src]="('backend_url' | env) + advertisement.logo" alt=""
+                                        class="w-100 circle-image">
+                                </div>
+                                <div class="text-right position-absolute" style="right: 0;">
+                                    <button mat-button class="bg-transparent cursor-pointer" matStepperNext><img
+                                            src="./assets/icon/arrow-right.svg" alt=""></button>
+                                </div>
+                            </div>
+
+                            <div class="position-relative px-1 mt-2">
+                                <div class="custom-fields text-center">
+                                    <div class="d-inline w-80"> {{ advertisement.desiredJob }} </div>
+                                </div>
+                                <div class="custom-fields text-center mt-1">
+                                    <div class="d-inline capitalize w-50 text-center mr-1"
+                                        style="min-height: 50px;vertical-align: bottom;">{{ advertisement.activitySector
+                                        }}</div>
+                                    <div class="d-inline capitalize w-50 text-center pt-1"
+                                        style="min-height: 50px;vertical-align: bottom;">{{ advertisement.location }}
+                                    </div>
+                                </div>
+
+
+                                <div class="custom-fields text-center mt-1">
+                                    <div class="d-inline w-80">{{advertisement.experienceYears}} d’expérience</div>
+                                </div>
+                                <div class="custom-fields text-center mt-1">
+                                    <div class="d-inline w-80">{{ advertisement.salary }}</div>
+                                </div>
+                            </div>
+                            <div class="action-button w-100">
+                                <!-- <div class="inner">
+                                    <button mat-mini-fab type="button" class="refreshBtn" (click)="getAdvertisement()">
+                                        <mat-icon>refresh</mat-icon>
+                                    </button>
+                                </div> -->
+                                <div class="inner">
+                                    <button mat-raised-button type="button" class="deleteBtn"
+                                        (click)="addToBlackList(advertisement._id, advertisement.recruiter)">
+                                        <img src="./assets/icon/cancel-btn.svg" alt="" style="width: 14px">
+                                    </button>
+                                </div>
+                                <div class="inner">
+                                    <button mat-raised-button type="button" class="winBtn"
+                                        (click)="addWin(advertisement._id,advertisement.recruiter)">
+                                        <img src="./assets/icon/win-btn-bleu.svg" alt="" style="width: 32px">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-step>
+
+                    <mat-step>
+                        <div class="card-matching-step card-info">
+                            <h3 class="title"> {{ advertisement.companyName }} </h3>
+                            <div class="d-block text-center position-relative">
+                                <img src="./assets/icon/space-title.svg" alt="">
+                                <p class="desciption mb-0">
+                                    {{ advertisement.companyTitle }}
+                                </p>
+                                <img src="./assets/icon/space-title.svg" alt="">
+                                <div class="picture-card-matching mt-1">
+                                    <img [src]="('backend_url' | env) + advertisement.logo" alt=""
+                                        class="w-100 circle-image">
+                                </div>
+                                <div class="position-relative mt-3">
+                                    <div class="text-left position-absolute" style="left: 0;">
+                                        <button mat-button class="bg-transparent cursor-pointer" matStepperPrevious><img
+                                                src="./assets/icon/arrow-left.svg" alt=""></button>
+                                    </div>
+                                    <div class="text-right position-absolute" style="right: 0;">
+                                        <button mat-button class="bg-transparent cursor-pointer" matStepperNext><img
+                                                src="./assets/icon/arrow-right.svg" alt=""></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center job-title">
+                                <span> {{ advertisement.desiredJob }} </span>
+                            </div>
+                            <div class="position-relative p1-1 mt-1">
+
+                                <div class="card-matching-details">
+                                    <h3 class="title2">
+                                        <img src="./assets/icon/mission-generale.svg" alt="" width="30px">
+                                        <span>Mission Générale</span>
+                                    </h3>
+                                    <div class="desc-candidate">
+                                        {{ advertisement.missions }}
+                                    </div>
+                                </div>
+
+                                <div class="card-matching-details mt-1">
+                                    <h3 class="title2">
+                                        <img src="./assets/icon/Taches.svg" alt="" width="30px">
+                                        <span>Descriptif de poste</span>
+                                    </h3>
+                                    <div class="desc-candidate">
+                                        <ul class="list">
+                                            <li *ngFor="let description of advertisement.descriptions">
+                                                {{ description }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="card-matching-details mt-1">
+                                    <h3 class="title2">
+                                        <img src="./assets/icon/Profil2.svg" alt="" width="30px">
+                                        <span>Prérequis</span>
+                                    </h3>
+                                    <div class="desc-candidate">
+                                        <p>
+                                            {{ advertisement.prerequisite }}
+                                        </p>
+                                        <div class="text-center">
+                                            <strong class="text-center">Langue</strong>
+                                        </div>
+
+                                        <ul class="list">
+                                            <li *ngFor="let item of advertisement.languages">
+                                                {{ item.language }} : {{ item.languageLevel }}
+                                            </li>
+                                        </ul>
+
+                                        <div class="text-center">
+                                            <strong>Langues et Informatique</strong>
+                                        </div>
+
+                                        <ul class="list">
+                                            <li *ngFor="let item of advertisement.programingLanguages.language">
+                                                {{ item }}
+                                            </li>
+                                            <li *ngFor="let item of advertisement.programingLanguages.logiciel">
+                                                {{ item }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="card-matching-details mt-1">
+                                    <h3 class="title2">
+                                        <img src="./assets/icon/Taches.svg" alt="" width="30px">
+                                        <span>Autres informations</span>
+                                    </h3>
+                                    <span class="desc-candidate">
+                                        <ul class="list">
+                                            <li>Type de contrat : {{ advertisement.contract }}</li>
+                                            <li>Type de poste : {{ advertisement.jobType }}</li>
+                                            <li>Mode de travail : {{ advertisement.jobMode }}</li>
+                                            <li>Niv. managérial : {{ advertisement.managerialLevel }}</li>
+                                            <li>Effectif géré : {{ advertisement.effective }}</li>
+                                        </ul>
+                                    </span>
+                                </div>
+
+                                <div class="card-matching-details mt-1">
+                                    <h3 class="title2">
+                                        <img src="./assets/icon/calendar.png" alt="" width="30px">
+                                        <span>Date prise de fonction</span>
+                                    </h3>
+                                    <span class="desc">
+                                        <strong>{{ advertisement.startedDate | date: 'yyyy-dd-MM' }}</strong>
+                                    </span>
+                                </div>
+                                <div class="action-button pt-1 w-100">
+                                    <!-- <div class="inner">
+                                        <button mat-mini-fab type="button" class="refreshBtn"
+                                            (click)="getAdvertisement()">
+                                            <mat-icon>refresh</mat-icon>
+                                        </button>
+                                    </div> -->
+                                    <div class="inner">
+                                        <button mat-raised-button type="button" class="deleteBtn"
+                                            (click)="addToBlackList(advertisement._id, advertisement.recruiter)">
+                                            <img src="./assets/icon/cancel-btn.svg" alt="" style="width: 14px">
+                                        </button>
+                                    </div>
+                                    <div class="inner">
+                                        <button mat-raised-button type="button" class="winBtn"
+                                            (click)="addWin(advertisement._id, advertisement.recruiter)">
+                                            <img src="./assets/icon/win-btn-bleu.svg" alt="" style="width: 32px">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-step>
+
+                    <mat-step>
+                        <div class="card-matching-step card-values">
+                            <h3 class="title p-1">{{ advertisement.companyName }}</h3>
+                            <div class="top-content text-center w-100 mx-1 p-1">
+                                <h3 class="top-content text-secondary text-center uppercase">présentation générale</h3>
+                                <p>
+                                    {{ advertisement.companyDescription }}
+                                </p>
+                            </div>
+
+                            <div class="position-relative pl-1">
+                                <button mat-button class="bg-transparent position-absolute cursor-pointer"
+                                    matStepperPrevious>
+                                    <img src="./assets/icon/arrow-left-black.svg" alt=""></button>
+                            </div>
+
+                            <div class="text-secondary text-center">
+                                <h3 class="uppercase">Valeurs</h3>
+                            </div>
+
+                            <div class="circle-content position-relative pt-5">
+                                <div class="d-block value-one">
+                                    <div class="text-content">
+                                        {{ advertisement.companyValues[0] ? advertisement.companyValues[0].name : '' }}
+                                    </div>
+                                </div>
+                                <div class="d-block value-two">
+                                    <div class="text-content">
+                                        {{ advertisement.companyValues[1] ? advertisement.companyValues[1].name : '' }}
+                                    </div>
+                                </div>
+                                <div class="d-block value-three">
+                                    <div class="text-content">
+                                        {{ advertisement.companyValues[2] ? advertisement.companyValues[2].name : '' }}
+                                    </div>
+                                </div>
+                                <div class="d-block value-four">
+                                    <div class="text-content">
+                                        {{ advertisement.companyValues[3] ? advertisement.companyValues[3].name : '' }}
+                                    </div>
+                                </div>
+                                <div class="d-block value-five">
+                                    <div class="text-content">
+                                        {{ advertisement.companyValues[4] ? advertisement.companyValues[4].name : '' }}
+                                    </div>
+                                </div>
+                                <div class="d-block value-six">
+                                    <div class="text-content">
+                                        {{ advertisement.companyValues[5] ? advertisement.companyValues[5].name : '' }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="more-content p-1">
+
+                                <div *ngIf="advertisement.companyWebSite"
+                                    class="custom-fields info-recruteur-title text-center mb-2">
+                                    <a [href]="advertisement.companyWebSite" target="_blank">
+                                        <span style="border: none !important;">{{ advertisement.companyWebSite }}</span>
+                                    </a>
+                                </div>
+
+                                <div class="social-media text-center">
+                                    <ng-container *ngIf="advertisement.companyFacebook">
+                                        <a [href]="advertisement.companyFacebook" target="_blank"><img
+                                                class="mr-1 inline-block cursor-pointer"
+                                                src="./assets/icon/circle-facebook.svg" alt="facebook"></a>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="advertisement.companyInstagram">
+                                        <a [href]="'https://www.instagram.com/' + advertisement.companyInstagram"
+                                            target="_blank"> <img class="mr-1 inline-block cursor-pointer"
+                                                src="./assets/icon/circle-instagram.svg" alt="instagram"></a>
+                                    </ng-container>
+                                    <ng-container *ngIf="advertisement.companyLinkedin">
+                                        <a [href]="advertisement.companyLinkedin" target="_blank"><img
+                                                class="mr-1 inline-block cursor-pointer"
+                                                src="./assets/icon/circle-linkedin.svg" alt="linkedin"></a>
+                                    </ng-container>
+                                    <ng-container *ngIf="advertisement.companyTwitter">
+                                        <a [href]="'https://www.twitter.com/' + advertisement.companyTwitter"
+                                            target="_blank"><img class="mr-1 inline-block cursor-pointer"
+                                                src="./assets/icon/circle-twitter.svg" alt="twitter"></a>
+                                    </ng-container>
+                                </div>
+                                <div class="action-button mt-1 w-100">
+                                    <!-- <div class="inner">
+                                        <button mat-mini-fab type="button" class="refreshBtn"
+                                            (click)="getAdvertisement()">
+                                            <mat-icon>refresh</mat-icon>
+                                        </button>
+                                    </div> -->
+                                    <div class="inner">
+                                        <button mat-raised-button type="button" class="deleteBtn"
+                                            (click)="addToBlackList(advertisement._id, advertisement.recruiter)">
+                                            <img src="./assets/icon/cancel-btn.svg" alt="" style="width: 14px">
+                                        </button>
+                                    </div>
+                                    <div class="inner">
+                                        <button mat-raised-button type="button" class="winBtn"
+                                            (click)="addWin(advertisement._id, advertisement.recruiter)">
+                                            <img src="./assets/icon/win-btn-bleu.svg" alt="" style="width: 32px">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-step>
+
+                </mat-horizontal-stepper>
+            </ng-container>
+        </section>
+    </ng-container>
+    <ng-template #notFound>
+        <section class="blank-card">
+            <ion-grid class="h-80vh">
+                <ion-row class="h-100 py-1">
+                    <ion-col size="12" class="custom-card ion-align-self-center p-1">
+                        <h3 class="text-primary text-center">Bienvenue sur <strong>job<span
+                                    class="text-secondary">winwin</span></strong></h3>
+                        <img class="w-100 mt-2" src="./assets/img/no-result-recruteur.svg" alt="">
+                        <h3 class="text text-center pt-2">Aucune offre ne correspond à votre profil pour le moment</h3>
+                        <div class="action-button mt-2 w-100">
+                            <div class="inner pb-2">
+                                <button mat-raised-button type="button" class="winBtn d-block mr-auto"
+                                    (click)="getAdvertisement()" style="width: 40% !important;">
+                                    <mat-icon class="align-middle">refresh</mat-icon>
+                                    <span class="align-middle">Actualiser</span>
+                                </button>
+                            </div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </section>
+    </ng-template>
+</ion-content>

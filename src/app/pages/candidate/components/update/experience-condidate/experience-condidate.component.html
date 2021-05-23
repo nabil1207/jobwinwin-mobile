@@ -1,0 +1,147 @@
+<form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons (click)="modalController.dismiss()" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <ion-title>Mes expériences</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="steps-content">
+            <div class="page-content" formArrayName="experiences">
+
+                <ng-container
+                    *ngFor="let experience of form.get('experiences')['controls']; let i=index; let last=last;"
+                    [formGroupName]="i">
+
+                    <div class="w-100">
+                        <ion-item class="custom-input">
+                            <ion-label position="floating">Emploi occupé <span class="required">*</span></ion-label>
+                            <ion-input type="text" formControlName="job"></ion-input>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('experiences')['controls'][i].get('job').invalid &&
+                    form.get('experiences')['controls'][i].get('job').errors.required && (form.get('experiences')['controls'][i].get('job').dirty || form.get('experiences')['controls'][i].get('job').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+
+                    <div class="w-100">
+                        <ion-item class="custom-select">
+                            <ion-label position="floating">Fonction <span class="required">*</span></ion-label>
+                            <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                                formControlName="function">
+                                <ion-select-option *ngFor="let item of globalService.functions" [value]="item._id">
+                                    {{item.name}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('experiences')['controls'][i].get('function').invalid && (form.get('experiences')['controls'][i].get('function').dirty || form.get('experiences')['controls'][i].get('function').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+                        <div fxLayout="column" fxFlex.xs="45%">
+                            <ion-item class="custom-datetime w-100">
+                                <ion-label position="floating">Date debut <span class="required">*</span></ion-label>
+                                <ion-datetime placeholder="De" formControlName="startedDate">
+                                </ion-datetime>
+                            </ion-item>
+                            <small class="text-error"
+                                *ngIf="form.get('experiences')['controls'][i].get('startedDate').invalid && (form.get('experiences')['controls'][i].get('startedDate').dirty || form.get('experiences')['controls'][i].get('startedDate').touched) ">
+                                Champ obligatoire
+                            </small>
+                        </div>
+                        <div fxLayout="column" fxFlex.xs="45%">
+                            <ion-item class="custom-datetime w-100">
+                                <ion-label position="floating">Date fin</ion-label>
+                                <ion-datetime placeholder="À" formControlName="endDate" [disabled]="inWork">
+                                </ion-datetime>
+                            </ion-item>
+                        </div>
+                    </div>
+
+                    <small class="text-error" *ngIf="
+            form.get('experiences')['controls'][i].get('startedDate').touched && 
+            form.get('experiences')['controls'][i].get('endDate').touched &&
+            form.get('experiences')['controls'][i].hasError('dateError')">
+                        Date fin doit être supérieur de la date debut
+                    </small>
+
+                    <!-- <div class="w-40">
+                        <ion-item class="custom-checkbox" lines="none">
+                            <ion-label class="ml-1">En poste</ion-label>
+                            <ion-checkbox class="ion-no-margin" color="primary" slot="start"
+                                (ionChange)="inWordChange()">
+                            </ion-checkbox>
+                        </ion-item>
+                    </div> -->
+
+                    <div class="w-100">
+                        <ion-item class="custom-input">
+                            <ion-label position="floating">Entreprise <span class="required">*</span></ion-label>
+                            <ion-input type="text" formControlName="company"></ion-input>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('experiences')['controls'][i].get('company').invalid && (form.get('experiences')['controls'][i].get('company').dirty || form.get('experiences')['controls'][i].get('company').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+
+                    <div class="w-100">
+                        <ion-item class="custom-select">
+                            <ion-label position="floating">Secteur d’activité <span class="required">*</span>
+                            </ion-label>
+                            <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                                formControlName="activitySector">
+                                <ion-select-option *ngFor="let item of globalService.activitySectors"
+                                    [value]="item._id">
+                                    {{item.name}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('experiences')['controls'][i].get('activitySector').invalid && (form.get('experiences')['controls'][i].get('activitySector').dirty || form.get('experiences')['controls'][i].get('activitySector').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+
+                    <div class="w-100">
+                        <ion-item class="custom-input">
+                            <ion-label position="floating">Lieu <span class="required">*</span></ion-label>
+                            <ion-input type="text" formControlName="location"></ion-input>
+                        </ion-item>
+                        <small class="text-error"
+                            *ngIf="form.get('experiences')['controls'][i].get('location').invalid && (form.get('experiences')['controls'][i].get('location').dirty || form.get('experiences')['controls'][i].get('location').touched) ">
+                            Champ obligatoire
+                        </small>
+                    </div>
+
+                    <div class="text-right mt-1">
+                        <ion-button fill="outline" class="btn-outline-danger ml-30" color="danger"
+                            *ngIf="form.controls['experiences']['controls'].length > 1"
+                            (click)="removeField(i, 'experiences')">
+                            Supprimer
+                        </ion-button>
+                    </div>
+                </ng-container>
+                <div class="text-left mt-1">
+                    <ion-button fill="outline" class="btn-outline" color="primary"
+                        [disabled]="!form.controls.experiences.valid" (click)="addField('experiences')">
+                        <ion-icon slot="start" name="add"></ion-icon>
+                        Ajouter une Expérience
+                    </ion-button>
+                </div>
+
+            </div>
+            <div class="text-right mt-2">
+                <ion-button type="submit" [disabled]="!form.valid">
+                    Enregistrer
+                </ion-button>
+            </div>
+        </section>
+    </ion-content>
+</form>

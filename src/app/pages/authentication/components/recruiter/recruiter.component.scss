@@ -1,0 +1,28 @@
+.other-choice {
+    .title {
+        line-height: 0.5;
+        text-align: center;
+      }
+      .title span {
+        display: inline-block;
+        position: relative;  
+      }
+      .title span:before,
+      .title span:after {
+        content: "";
+        position: absolute;
+        height: 5px;
+        border-bottom: 1px solid #ccc;
+        border-top: 1px solid #ccc;
+        top: 0;
+        width: 130px;
+      }
+      .title span:before {
+        right: 100%;
+        margin-right: 15px;
+      }
+      .title span:after {
+        left: 100%;
+        margin-left: 15px;
+      }
+}

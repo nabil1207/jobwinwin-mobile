@@ -1,0 +1,147 @@
+<form class="d-block" [formGroup]="formRecruiter" *ngIf="authService.user.role.name !== 'candidate'" (ngSubmit)="onSave()">
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons (click)="modalController.dismiss()" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <!-- <ion-buttons slot="end">
+                <ion-button type="submit" [disabled]="!formRecruiter.valid">
+                    Enregistrer
+                </ion-button>
+            </ion-buttons> -->
+            <ion-title>Identité</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="steps-content">
+            <div class="page-content">
+
+                <div class="d-block position-relative mr-auto pt-1" *ngIf="authService.user.role.name !== 'candidate'"
+                    style="width: 120px">
+                    <img class="circle-image"
+                        [src]="authService.user.picture ? (('backend_url' | env) + this.authService.user.picture.name) : 
+                    (this.authService.user.civility === 'Mr' ? '/assets/img/male.svg' : '/assets/img/female.svg' )" alt="profil">
+                    <div class="change-photo" (click)="addImageAction()">
+                        <mat-icon style="color: #ffffff; position: absolute;top: 2px; left: 3px;">edit</mat-icon>
+                    </div>
+                </div>
+
+                <div class="w-100">
+                    <ion-item class="custom-input">
+                        <ion-label position="floating">Nom <span class="required">*</span></ion-label>
+                        <ion-input type="text" formControlName="lastName"></ion-input>
+                    </ion-item>
+                </div>
+
+                <div class="w-100">
+                    <ion-item class="custom-input">
+                        <ion-label position="floating">Prénom <span class="required">*</span></ion-label>
+                        <ion-input type="text" formControlName="firstName"></ion-input>
+                    </ion-item>
+                </div>
+
+                <div class="w-100 custom-input">
+                    <ion-item class="custom-input">
+                        <!-- <span slot="start" class="mr-1" style="margin-top: 28px;">+212 &nbsp;</span> -->
+                        <ion-label position="floating">Téléphone personnel (+212) </ion-label>
+                        <ion-input type="tel" formControlName="firstPhoneNumber"></ion-input>
+                    </ion-item>
+                </div>
+
+                <div class="w-100 custom-input">
+                    <ion-item class="custom-input">
+                        <ion-label position="floating">Téléphone professionnel (+212) </ion-label>
+                        <ion-input type="tel" formControlName="secondPhoneNumber"></ion-input>
+                    </ion-item>
+                </div>
+
+                <div class="text-right mt-2">
+                    <ion-button type="submit" [disabled]="!formRecruiter.valid">
+                        Enregistrer
+                    </ion-button>
+                </div>
+
+            </div>
+        </section>
+    </ion-content>
+</form>
+
+<form class="d-block" [formGroup]="formCandidate" (ngSubmit)="onSave()"
+    *ngIf="authService.user.role.name === 'candidate'">
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons (click)="modalController.dismiss()" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <!-- <ion-buttons slot="end">
+                <ion-button type="submit" [disabled]="!formCandidate.valid">
+                    Enregistrer
+                </ion-button>
+            </ion-buttons> -->
+            <ion-title>Identité</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="steps-content">
+            <div class="page-content">
+
+                <ng-container *ngIf="authService.user.role.name === 'candidate'">
+
+                    <div class="w-100">
+                        <ion-item class="custom-input">
+                            <ion-label position="floating">Nom <span class="required">*</span></ion-label>
+                            <ion-input type="text" formControlName="lastName"></ion-input>
+                        </ion-item>
+                    </div>
+                    <small class="text-error"
+                        *ngIf="formCandidate.get('lastName').invalid && (formCandidate.get('lastName').dirty || formCandidate.get('lastName').touched) ">
+                        Champ obligatoire
+                    </small>
+
+                    <div class="w-100">
+                        <ion-item class="custom-input">
+                            <ion-label position="floating">Prénom <span class="required">*</span></ion-label>
+                            <ion-input type="text" formControlName="firstName"></ion-input>
+                        </ion-item>
+                    </div>
+                    <small class="text-error"
+                        *ngIf="formCandidate.get('firstName').invalid && (formCandidate.get('firstName').dirty || formCandidate.get('firstName').touched) ">
+                        Champ obligatoire
+                    </small>
+
+                    <ion-item class="custom-select w-100">
+                        <ion-label position="floating">Sexe</ion-label>
+                        <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                            formControlName="gender">
+                            <ion-select-option value="masculin">Homme</ion-select-option>
+                            <ion-select-option value="feminin">Femme</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <small class="text-error"
+                        *ngIf="formCandidate.get('gender').invalid && (formCandidate.get('gender').dirty || formCandidate.get('gender').touched) ">
+                        Champ obligatoire
+                    </small>
+
+                    <div class="w-100 custom-input">
+                        <ion-item class="custom-input">
+                            <ion-label position="floating">Téléphone (+212) <span class="required">*</span></ion-label>
+                            <ion-input type="tel" formControlName="phoneNumber"></ion-input>
+                        </ion-item>
+                    </div>
+
+                    <small class="text-error"
+                        *ngIf="formCandidate.get('phoneNumber').invalid && (formCandidate.get('phoneNumber').dirty || formCandidate.get('phoneNumber').touched) ">
+                        Champ obligatoire
+                    </small>
+
+                </ng-container>
+
+            </div>
+            <div class="text-right mt-2">
+                <ion-button type="submit" [disabled]="!formCandidate.valid">
+                    Enregistrer
+                </ion-button>
+            </div>
+        </section>
+    </ion-content>
+</form>

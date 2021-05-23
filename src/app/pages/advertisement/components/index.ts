@@ -1,0 +1,12 @@
+// export * from './create/create-advertisement/create-advertisement.component';
+// export * from './create/experience-required/experience-required.component';
+// export * from './create/photo-advertisement/photo-advertisement.component';
+// export * from './create/slider-advertisement/slider-advertisement.component';
+// export * from './create/validate-advertisement/validate-advertisement.component';
+// export * from './details/ads-details/ads-details.component';
+// export * from './details/ads-profile/ads-profile.component';
+// export * from './listes/listes.component';
+// export * from './update/date/date.component';
+// export * from './update/mission/mission.component';
+// export * from './update/profil/profil.component';
+// export * from './update/task/task.component';

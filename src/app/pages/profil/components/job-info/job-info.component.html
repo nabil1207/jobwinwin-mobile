@@ -1,0 +1,133 @@
+<div appScrollToTop>
+    <form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+
+        <div class="w-100">
+            <ion-item class="custom-input">
+                <ion-label position="floating">Poste souhaité <span class="required">*</span></ion-label>
+                <ion-input type="text" formControlName="searchedPost"></ion-input>
+            </ion-item>
+            <small class="text-error"
+                *ngIf="form.get('searchedPost').invalid && (form.get('searchedPost').dirty || form.get('searchedPost').touched) ">
+                Champ obligatoire
+            </small>
+        </div>
+
+        <!-- <div class="mt-1">
+            <ng-multiselect-dropdown label="aaaaa" [placeholder]="'Intitulés d\'usage'" [settings]="dropdownSettings"
+                [data]="globalService.usageTitles" formControlName="usageTitles"
+                (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)">
+            </ng-multiselect-dropdown>
+        </div> -->
+
+        <div>
+            <app-multi-select label="Intitulés d'usage" collection="usageTitles" formControlName="usageTitles">
+            </app-multi-select>
+            <small class="text-error" *ngIf="!form.get('usageTitles').value?.length">
+                Champ obligatoire
+            </small>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+            <div class="w-100" fxLayout="column" fxFlex.xs="45%">
+                <app-multi-select label="Type de contrat" collection="contracts" formControlName="contracts">
+                </app-multi-select>
+                <small class="text-error" *ngIf="!form.get('contracts').value?.length">
+                    Veuillez choisir au moins un type de contrat.
+                </small>
+            </div>
+            <div class="w-100" fxLayout="column" fxFlex.xs="45%">
+                <ion-item class="custom-select">
+                    <ion-label position="floating">Type de Poste <span class="required">*</span></ion-label>
+                    <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                        formControlName="jobType">
+                        <ion-select-option *ngFor="let item of globalService.jobTypes" [value]="item._id">
+                            {{item.name}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <small class="text-error"
+                    *ngIf="form.get('jobType').invalid && (form.get('jobType').dirty || form.get('jobType').touched) ">
+                    Champ obligatoire
+                </small>
+            </div>
+        </div>
+
+        <div class="w-100">
+            <app-multi-select label="Fonction" collection="functions" formControlName="functions"></app-multi-select>
+            <small class="text-error" *ngIf="!form.get('functions').value?.length">
+                Veuillez choisir au moins une fonction.
+            </small>
+        </div>
+
+        <div class="w-100">
+            <app-multi-select label="Secteur d’activité " collection="activitySectors" formControlName="activitySector">
+            </app-multi-select>
+            <small class="text-error" *ngIf="!form.get('activitySector').value?.length">
+                Veuillez choisir au moins un secteur d’activité.
+            </small>
+        </div>
+
+        <div class="w-100">
+            <ion-item class="custom-select w-100 ">
+                <ion-label position="floating">Mode de travail <span class="required">*</span></ion-label>
+                <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                    formControlName="jobMode">
+                    <ion-select-option *ngFor="let item of globalService.jobModes" [value]="item._id">
+                        {{item.name}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <small class="text-error"
+                *ngIf="form.get('jobMode').invalid && (form.get('jobMode').dirty || form.get('jobMode').touched) ">
+                Champ obligatoire
+            </small>
+        </div>
+
+        <div class="w-100">
+            <app-multi-select label="Lieu" collection="locations" formControlName="locations"></app-multi-select>
+            <small class="text-error" *ngIf="!form.get('locations').value?.length">
+                Veuillez choisir au moins une ville.
+            </small>
+        </div>
+
+        <h4 class="pt-2">Prétentions salariales (Dhs)</h4>
+        <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+            <div class="w-100" fxLayout="column" fxFlex.xs="45%">
+                <ion-item class="custom-input">
+                    <ion-label position="floating">À partir de <span class="required">*</span></ion-label>
+                    <ion-input type="number" formControlName="supposedSalaryMin"></ion-input>
+                </ion-item>
+                <small class="text-error"
+                    *ngIf="form.get('supposedSalaryMin').invalid && (form.get('supposedSalaryMin').dirty || form.get('supposedSalaryMin').touched) ">
+                    Champ obligatoire
+                </small>
+            </div>
+
+            <div class="w-100" fxLayout="column" fxFlex.xs="45%">
+                <ion-item class="custom-input">
+                    <ion-label position="floating">Jusqu'à <span class="required">*</span></ion-label>
+                    <ion-input type="number" formControlName="supposedSalaryMax"></ion-input>
+                </ion-item>
+                <small class="text-error"
+                    *ngIf="form.get('supposedSalaryMax').invalid && (form.get('supposedSalaryMax').dirty || form.get('supposedSalaryMax').touched) ">
+                    Champ obligatoire
+                </small>
+            </div>
+
+        </div>
+        <small class="text-error" *ngIf="form.get('supposedSalaryMax').touched && !form.get('supposedSalaryMax').hasError('required') 
+        && form.hasError('salaryErreur')">
+            Le salaire maximum doit être supérieur au salaire minimum
+        </small>
+
+        <div class="mt-2 mb-3 text-center">
+            <ion-button type="submit" class="w-80" color="primary" [disabled]="!form.valid
+            || form.get('usageTitles').value?.length <= 0
+            || form.get('contracts').value?.length <= 0
+            || form.get('functions').value?.length <= 0
+            || form.get('activitySector').value?.length <= 0
+            || form.get('locations').value?.length <= 0
+            ">
+                Continuez
+            </ion-button>
+        </div>
+    </form>
+</div>

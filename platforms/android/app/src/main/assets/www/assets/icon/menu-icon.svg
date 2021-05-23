@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="54.333" height="54.667" viewBox="0 0 54.333 54.667">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_12" data-name="Rectangle 12" width="54.333" height="54.667" transform="translate(0 0)" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="Rectangle_13" data-name="Rectangle 13" width="23.499" height="17.345" transform="translate(0 0)" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="btn_menu" data-name="btn menu" transform="translate(-35 -24)">
+    <g id="Vector_Smart_Object" data-name="Vector Smart Object" transform="translate(35 24)">
+      <g id="Group_24" data-name="Group 24">
+        <g id="Group_23" data-name="Group 23" clip-path="url(#clip-path)">
+          <path id="Path_15" data-name="Path 15" d="M54.333,27.333A27.167,27.167,0,1,1,27.167,0,27.25,27.25,0,0,1,54.333,27.333" fill="#fcc224"/>
+        </g>
+      </g>
+    </g>
+    <g id="Vector_Smart_Object-2" data-name="Vector Smart Object" transform="translate(51.25 43.328)">
+      <g id="Group_26" data-name="Group 26">
+        <g id="Group_25" data-name="Group 25" clip-path="url(#clip-path-2)">
+          <path id="Path_16" data-name="Path 16" d="M21.782,0h-20A1.706,1.706,0,0,0,.058,1.681v.431a1.706,1.706,0,0,0,1.72,1.682h20A1.706,1.706,0,0,0,23.5,2.112V1.681A1.706,1.706,0,0,0,21.782,0" fill="#fff"/>
+          <path id="Path_17" data-name="Path 17" d="M21.722,6.8h-20A1.706,1.706,0,0,0,0,8.484v.431A1.706,1.706,0,0,0,1.718,10.6h20A1.705,1.705,0,0,0,23.44,8.916V8.484A1.7,1.7,0,0,0,21.722,6.8" fill="#fff"/>
+          <path id="Path_18" data-name="Path 18" d="M21.722,13.55h-20A1.706,1.706,0,0,0,0,15.231v.431a1.706,1.706,0,0,0,1.719,1.682h20a1.705,1.705,0,0,0,1.718-1.682v-.431a1.7,1.7,0,0,0-1.718-1.681" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

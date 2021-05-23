@@ -1,0 +1,8 @@
+{
+  "name": "JobWinWin",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

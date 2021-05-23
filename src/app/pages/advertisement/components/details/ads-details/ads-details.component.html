@@ -1,0 +1,111 @@
+<ng-container *ngIf="advertisementService.advertisement">
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons routerLink="/dashboard/advertisement" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <ion-buttons slot="primary">
+                <ion-button >
+                    <ion-icon slot="icon-only" ios="ellipsis-vertical" md="ellipsis-vertical"></ion-icon>
+                    <!-- <mat-menu #menu="matMenu" [matMenuTriggerFor]="menu">
+                        <button class="icon-menu-ads" mat-menu-item>
+                            <span>Modifier annonce</span>
+                        </button>
+                    </mat-menu> -->
+                </ion-button>
+            </ion-buttons>
+            <ion-title>Annonces</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="detail-mission-content mt-1 mb-3">
+            <div class="detail-mission">
+                <h3 class="title">
+                    <img src="./assets/icon/mission-generale-blue.svg" alt="" width="30px">
+                    <span>Mission Générale</span>
+                    <mat-icon class="float-right" (click)="openMission()">edit</mat-icon>
+                </h3>
+                <span class="desc">
+                    {{ advertisementService.advertisement.missions }}
+                </span>
+            </div>
+            <div class="detail-mission mt-2">
+                <h3 class="title">
+                    <img src="./assets/icon/Taches-blue.svg" alt="" width="30px">
+                    <span>Descriptif de poste</span>
+                    <mat-icon class="float-right" (click)="openTasks()">edit</mat-icon>
+                </h3>
+                <div class="desc">
+                    <ul class="list">
+                        <li *ngFor="let description of advertisementService.advertisement.descriptions">
+                            {{ description }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="detail-mission mt-2">
+                <h3 class="title">
+                    <img src="./assets/icon/profil-blue.svg" alt="" width="30px">
+                    <span>Prérequis</span>
+                    <mat-icon class="float-right" (click)="openProfile()">edit</mat-icon>
+                </h3>
+                <span class="desc">
+                    <p>
+                        {{ advertisementService.advertisement.prerequisite }}
+                    </p>
+                    <h5 class="text-center">
+                        <strong>Langue</strong>
+                    </h5>
+                    <ul class="list">
+                        <li *ngFor="let item of languages">
+                            {{ item.language.name }} : {{ item.languageLevel.name }}
+                        </li>
+                    </ul>
+                    <h5 class="text-center">
+                        <strong>Compétences informatiques</strong>
+                    </h5>
+                    <ul class="list" id="programming-languages">
+                        <li *ngFor="let item of programingLanguages"> {{ item }} </li>
+                    </ul>
+                </span>
+            </div>
+            <div class="detail-mission mt-2">
+                <h3 class="title">
+                    <img src="./assets/icon/profil-blue.svg" alt="" width="30px">
+                    <span>Autres informations</span>
+                    <mat-icon class="float-right" (click)="openOtherInfo()">edit</mat-icon>
+                </h3>
+                <span class="desc">
+                    <ul class="list">
+                        <li *ngIf="infos.contract">Type de contrat : {{ infos.contract.name }} </li>
+                        <li *ngIf="infos.jobType">Type de poste : {{ infos.jobType.name }} </li>
+                        <li *ngIf="infos.jobMode">Mode de travail : {{ infos.jobMode.name }} </li>
+                        <li *ngIf="infos.managerialLevel">Niv. managérial : {{ infos.managerialLevel.name }} </li>
+                        <li *ngIf="infos.effective">Effectif géré : {{ infos.effective.name }}</li>
+                    </ul>
+                </span>
+            </div>
+            <div class="detail-mission mt-2">
+                <h3 class="title">
+                    <img src="./assets/icon/calender.svg" alt="" width="30px">
+                    <span>Date prise de poste</span>
+                    <mat-icon class="float-right" (click)="openDate()">edit</mat-icon>
+                </h3>
+                <span class="desc">
+                    <p class="ml-2">Le {{ advertisementService.advertisement.startedDate | date: 'dd/MM/yyyy' }} </p>
+                </span>
+            </div>
+            <!-- *appCanChangeStatus="advertisementService.advertisement.recruiter" -->
+            <div class="detail-mission mt-2" *ngIf="authService.user.role.name == 'Responsable principale' "  >
+                <h3 class="title">
+                    <img src="/assets/icon/statusAds.svg" alt="" width="30px">
+                    <span>Statut</span>
+                    <mat-icon class="float-right" (click)="openStatus()">edit</mat-icon>
+                </h3>
+                <span class="desc">
+                    <p class="ml-2">{{ advertisementService.advertisement.status }} </p>
+                </span>
+            </div>
+        </section>
+    </ion-content>
+</ng-container>

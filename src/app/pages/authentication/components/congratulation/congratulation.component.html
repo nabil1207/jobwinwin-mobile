@@ -1,0 +1,30 @@
+<section class="congratulation mt-1">
+    <ng-container *ngIf="authService.fromPage === 'sign-up', else contact " >
+        <img class="d-block mt-1 mb-2 mr-auto" src="./assets/img/logo.svg" alt="">
+        <h2 class="text-center"> Votre compte Jobwinwin a été créé avec succès!</h2>
+        <div class="mt-2 text-center">
+            Les recruteurs sont à quelques clics! <br>
+            Suivez les étapes d'inscription pour matcher et trouver votre futur emploi
+        </div>
+        <img class="d-block mt-3 mr-auto" src="./assets/img/congratulation-ilustration.svg" alt="">
+        <div class="text-center mt-3">
+            <ion-button class="yellow-btn w-80" color="secondary" (click)="goTo()">
+                Ok
+            </ion-button>
+        </div>
+    </ng-container>
+    
+    <ng-template #contact>
+        <img class="d-block mt-4 mr-auto" src="./assets/img/logo.svg" alt="">
+        <div class="mt-3 text-center">
+            Nous vous remercions pour votre message, un conseiller Jobwinwin prendra rapidement contact avec vous.
+        </div>
+        <img class="d-block mt-3 mr-auto w-30" src="./assets/img/msg-check.svg" alt="">
+        <div class="text-center mt-3">
+            <ion-button class="yellow-btn w-80" color="secondary" (click)="goTo()">
+                Ok
+            </ion-button>
+        </div>
+    </ng-template>
+
+</section>

@@ -1,0 +1,26 @@
+<form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons (click)="close()" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <ion-title>Mission générale</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="steps-content">
+            <div class="page-content">
+                <mat-form-field class="w-100">
+                    <mat-label>Missions</mat-label>
+                    <textarea matInput placeholder="" matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=7 formControlName="missions">
+                    </textarea>
+                </mat-form-field>
+                <div class="text-right mt-1">
+                    <ion-button type="submit" [disabled]="!form.valid">
+                        Enregistrer
+                    </ion-button>
+                </div>
+            </div>
+        </section>
+    </ion-content>
+</form>

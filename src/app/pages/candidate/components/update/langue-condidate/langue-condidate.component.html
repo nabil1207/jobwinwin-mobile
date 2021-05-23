@@ -1,0 +1,99 @@
+<form class="d-block" [formGroup]="form">
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons (click)="modalController.dismiss()" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <!-- <ion-buttons slot="end">
+                <ion-button (click)="onSave()" [disabled]="languagesList.length <= 0
+                || form.get('programingLanguages.logiciel').value?.length <= 0
+                || form.get('programingLanguages.language').value?.length <= 0">
+                    Enregistrer
+                </ion-button>
+            </ion-buttons> -->
+            <ion-title>Langue</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="steps-content">
+            <div class="page-content">
+
+                <div formGroupName="languages">
+                    <div class="mt-1" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+
+                        <ion-item class="custom-select w-100" fxLayout="column" fxFlex.xs="45%">
+                            <ion-label position="floating">Langue</ion-label>
+                            <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                                formControlName="language">
+                                <ion-select-option
+                                    *ngFor="let item of globalService.languages | languages:languagesList"
+                                    [value]="item._id">
+                                    {{item.name}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item class="custom-select w-100" fxLayout="column" fxFlex.xs="45%">
+                            <ion-label position="floating">Niveau de langue</ion-label>
+                            <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+                                formControlName="languageLevel">
+                                <ion-select-option *ngFor="let item of globalService.languagesLevels" [value]="item._id">
+                                    {{item.name}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
+                    </div>
+                </div>
+
+                <div class="mb-1 mt-1">
+                    <ul class="customList">
+                        <li *ngFor="let item of languagesList;let i =index;">
+                            <span class="text-primary text-left">
+                                {{ item.language.name }} : {{ item.languageLevel.name}}
+                            </span>
+                            <mat-icon class="cursor-pointer btn-round vertical-align ml-1" (click)="deleteLanguage(i)">
+                                close
+                            </mat-icon><br>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mt-1 mb-1 text-left">
+                    <ion-button fill="outline" class="btn-outline w-40" color="primary" (click)="addLanguage()">
+                        Ajouter
+                        <ion-icon slot="end" name="add"></ion-icon>
+                    </ion-button>
+                </div>
+
+                <div class="mb-1" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px"
+                    formGroupName="programingLanguages">
+                    <div fxLayout="column" fxFlex.xs="45%">
+                        <app-multi-select label="Langages informatiques" collection="programmingLanguages"
+                            formControlName="language"></app-multi-select>
+                        <small class="text-error" *ngIf="form.get('programingLanguages.language').value?.length <= 0">
+                            Champ obligatoire
+                        </small>
+                    </div>
+                    <div fxLayout="column" fxFlex.xs="45%">
+                        <app-multi-select label="Logiciels informatiques" collection="logiciels"
+                            formControlName="logiciel">
+                        </app-multi-select>
+                        <small class="text-error" *ngIf="form.get('programingLanguages.logiciel').value?.length <= 0">
+                            Champ obligatoire
+                        </small>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="text-right mt-2">
+                <ion-button type="submit" (click)="onSave()" [disabled]="languagesList.length <= 0
+                || form.get('programingLanguages.logiciel').value?.length <= 0
+                || form.get('programingLanguages.language').value?.length <= 0">
+                    Enregistrer
+                </ion-button>
+            </div>
+        </section>
+    </ion-content>
+</form>

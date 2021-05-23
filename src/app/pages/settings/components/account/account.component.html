@@ -1,0 +1,70 @@
+<form class="d-block" [formGroup]="form" (ngSubmit)='onSave()'>
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons (click)="modalController.dismiss()" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <ion-title>Compte</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="steps-content">
+            <div class="page-content">
+
+                <div class="w-100">
+                    <ion-item class="custom-input">
+                        <ion-label position="floating">Email <span class="required">*</span></ion-label>
+                        <ion-input type="email" formControlName="email" readonly></ion-input>
+                    </ion-item>
+                </div>
+
+                <div class="w-100">
+                    <ion-item class="custom-input">
+                        <ion-label position="floating">Mot de passe actuel <span class="required">*</span></ion-label>
+                        <ion-input type="password" formControlName="currentPassword"></ion-input>
+                    </ion-item>
+                </div>
+                <small class="text-error"
+                    *ngIf="form.get('currentPassword').invalid && (form.get('currentPassword').dirty || form.get('currentPassword').touched) ">
+                    Champ obligatoire
+                </small>
+
+                <div class="w-100">
+                    <ion-item class="custom-input">
+                        <ion-label position="floating">Mot de passe <span class="required">*</span></ion-label>
+                        <ion-input type="password" formControlName="newPassword"></ion-input>
+                    </ion-item>
+                </div>
+                <small class="text-error"
+                    *ngIf="form.get('newPassword').invalid && (form.get('newPassword').dirty || form.get('newPassword').touched) ">
+                    Champ obligatoire
+                </small>
+
+                <div class="w-100">
+                    <ion-item class="custom-input">
+                        <ion-label position="floating">Confirmer le mot de passe <span class="required">*</span>
+                        </ion-label>
+                        <ion-input type="password" formControlName="confirmPassword"></ion-input>
+                    </ion-item>
+                </div>
+                <small class="text-error"
+                    *ngIf="form.get('confirmPassword').invalid && (form.get('confirmPassword').dirty || form.get('confirmPassword').touched) ">
+                    Champ obligatoire
+                </small>
+
+                <small class="text-error" *ngIf="form.get('confirmPassword').touched &&
+                !form.get('confirmPassword').hasError('required') &&
+                !form.get('confirmPassword').hasError('minlength') &&
+                form.hasError('passwordsDoNotMatch')" class="text-error">
+                    Les mots de passe ne correspondent pas.
+                </small>
+
+            </div>
+            <div class="text-right mt-2">
+                <ion-button type="submit" [disabled]="!form.valid">
+                    Enregistrer
+                </ion-button>
+            </div>
+        </section>
+    </ion-content>
+</form>

@@ -1,0 +1,69 @@
+<form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+    <!--  -->
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons (click)="modalController.dismiss()" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <ion-title>Valeurs</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="steps-content">
+            <div class="page-content">
+
+                <app-multi-select label="Valeurs" [limit]="6" collection="values" formControlName="values">
+                </app-multi-select>
+
+                <!-- <mat-accordion class="custom-mat-accordion w-100">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header class="pl-0">
+                            <mat-panel-title>
+                                Valeurs
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <div *ngFor="let item of values; let i = index;" class="d-inline w-50"
+                            [ngClass]="{'mr-1': i%2 === 0, 'float-right': i%2 !== 0}">
+                            <mat-checkbox [checked]="item.checked" [value]="item._id"
+                                (change)="onChangeValues(i, $event)" [disabled]="maxLenght">
+                                {{ item.name }}
+                            </mat-checkbox>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion> -->
+                <!-- <span class="float-right mt-1"> {{ checkedValue }} /{{ values.length }}</span> -->
+
+                <!-- <ion-item class="custom-input">
+                <ion-label position="floating">Autres valeurs </ion-label>
+                <ion-input type="text" #element></ion-input>
+                <ion-icon (click)="addValue(element)" name="add"></ion-icon>
+            </ion-item> -->
+
+                <!-- <mat-form-field class="w-100 mt-2">
+                <mat-label>Autres valeurs</mat-label>
+                <input matInput placeholder="ajouter vos valeurs" #element>
+                <mat-icon matSuffix (click)="addValue(element)">add</mat-icon>
+            </mat-form-field> -->
+
+                <!-- <div class="mb-1 mt-1">
+                <ul class="customList">
+                    <li *ngFor="let item of otherValues; let i = index;">
+                        {{ item }}
+                        <span class="text-primary text-left" (click)="removeValue(i)">
+                            <mat-icon class="cursor-pointer btn-round vertical-align ml-1">close</mat-icon>
+                        </span><br>
+                    </li>
+                </ul>
+            </div> -->
+
+            </div>
+            <div class="text-right mt-2">
+                <ion-button type="submit" [disabled]="!form.valid" (click)="onSave()">
+                    Enregistrer
+                </ion-button>
+            </div>
+        </section>
+    </ion-content>
+
+</form>

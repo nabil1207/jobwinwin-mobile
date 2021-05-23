@@ -1,0 +1,72 @@
+<form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+    <ion-header class="list-header ion-no-border" mode="md">
+        <ion-toolbar>
+            <ion-buttons (click)="modalController.dismiss()" routerDirection="root" class="roundbutton" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <!-- <ion-buttons slot="end">
+                <ion-button type="submit" [disabled]="!form.valid">
+                    Enregistrer
+                </ion-button>
+            </ion-buttons> -->
+            <ion-title>Mes liens</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [fullscreen]="true" class="forms">
+        <section class="steps-content">
+            <div class="page-content">
+                <div class="custom-input-icon">
+                    <ion-icon class="align-middle" src="./assets/icon/website-input.svg"></ion-icon>
+                    <mat-form-field class="ml-1 w-90">
+                        <mat-label>Site internet</mat-label>
+                        <input matInput placeholder="" formControlName="webSite">
+                        <span matPrefix>www.</span>
+                    </mat-form-field>
+                </div>
+                <div class="custom-input-icon">
+                    <ion-icon class="align-middle" src="./assets/icon/blogger-input.svg"></ion-icon>
+                    <mat-form-field class="ml-1 w-90">
+                        <mat-label>Blog</mat-label>
+                        <input matInput placeholder="" formControlName="blog">
+                        <span matPrefix>www.</span>
+                    </mat-form-field>
+                </div>
+                <div class="custom-input-icon">
+                    <ion-icon class="align-middle" src="./assets/icon/linkedin-input.svg"></ion-icon>
+                    <mat-form-field class="ml-1 w-90">
+                        <mat-label>Linkedin</mat-label>
+                        <input matInput placeholder="" formControlName="linkedin">
+                    </mat-form-field>
+                </div>
+                <div class="custom-input-icon">
+                    <ion-icon class="align-middle" src="./assets/icon/instagram-input.svg"></ion-icon>
+                    <mat-form-field class="ml-1 w-90">
+                        <mat-label>Instagram</mat-label>
+                        <input matInput placeholder="" formControlName="instagram">
+                        <span matPrefix>@</span>
+                    </mat-form-field>
+                </div>
+                <div class="custom-input-icon">
+                    <ion-icon class="align-middle" src="./assets/icon/twitter-input.svg"></ion-icon>
+                    <mat-form-field class="ml-1 w-90">
+                        <mat-label>Twitter</mat-label>
+                        <input matInput placeholder="" formControlName="twitter">
+                        <span matPrefix>@</span>
+                    </mat-form-field>
+                </div>
+                <div class="custom-input-icon">
+                    <ion-icon class="align-middle" src="./assets/icon/facebook-input.svg"></ion-icon>
+                    <mat-form-field class="ml-1 w-90">
+                        <mat-label>Facebook</mat-label>
+                        <input matInput placeholder="" formControlName="facebook">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="text-right mt-2">
+                <ion-button type="submit" [disabled]="!form.valid">
+                    Enregistrer
+                </ion-button>
+            </div>
+        </section>
+    </ion-content>
+</form>

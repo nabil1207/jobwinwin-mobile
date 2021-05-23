@@ -1,0 +1,39 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons (click)="modalController.dismiss()" routerDirection="root" class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <ion-title>Soft skills</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="steps-content">
+        <div class="page-content">
+            <form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+                <div class="text-center mt-2">
+                    <p> Vos softskills sont très importants pour les recruteurs.
+                        Choisissez dans la liste les 5 softskills qui vous représentent le plus.
+                    </p>
+                </div>
+                <app-multi-select label="Mes soft skills" [limit] = "5" collection="softSkills" formControlName="skills">
+                </app-multi-select>
+                <div class="text-center mt-2">
+                    <p>En recrutement une valeur est parfois plus
+                        décisive qu’une compétence.
+                        Renforcer la qualité de votre profil en
+                        séléctionnant dans la liste les 6 valeurs qui vous
+                        correspondent</p>
+                </div>
+                <app-multi-select label="Mes valeurs" [limit] = "6" collection="values" formControlName="values">
+                </app-multi-select>
+            
+            </form>
+        </div>
+        <div class="text-right mt-2">
+            <ion-button type="submit" (click)="onSave()" [disabled]="form.get('values').value?.length < 6
+            ||  form.get('skills').value?.length < 5 ? true : false">
+                Enregistrer
+            </ion-button>
+        </div>
+    </section>
+</ion-content>

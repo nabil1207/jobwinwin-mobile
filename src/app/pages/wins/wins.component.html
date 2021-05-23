@@ -1,0 +1,53 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons (click)="goBack()" class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <!-- <ion-buttons slot="primary">
+            <ion-button>
+                <ion-icon slot="icon-only" ios="ellipsis-vertical" md="ellipsis-vertical"></ion-icon>
+            </ion-button>
+        </ion-buttons> -->
+        <ion-title>Wins</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="settings-content mb-3">
+        <div class="page-content">
+            <ion-list>
+                <!-- <ion-list-header>
+                    Winwin
+                </ion-list-header> -->
+                <ion-item class="win-status" lines="none" *ngFor="let win of wins">
+                    <ion-avatar slot="start">
+                        <img [src]="win.logo ? (('backend_url' | env) + win.logo.name) : '/assets/img/default-image.svg'">
+                    </ion-avatar>
+                    <ion-label>
+                        <h2 *ngIf="authService.user.userRole != 'Candidate' " >{{ win.candidate.firstName }} {{ win.candidate.lastName }}</h2>
+                        <h2 *ngIf="authService.user.userRole === 'Candidate' " >{{ win.name }}</h2>
+                        <p>Veut te contacter</p>
+                    </ion-label>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" class="more-btn-win">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item *ngIf="authService.user.userRole != 'Candidate'"  (click)="showCandidate('item.user._id')">
+                            <span>Voir le profil R</span>
+                        </button>
+                        <button mat-menu-item *ngIf="authService.user.userRole === 'Candidate'"  (click)="showAdvertissement('item.advertisement')">
+                            <span>Voir le profil C</span>
+                        </button>
+                        <button mat-menu-item>
+                            <a [routerLink]="['/dashboard/messenger']" [queryParams]="{ matching: win._id }">
+                                contacter
+                            </a>
+                        </button>
+                        <button mat-menu-item (click)="onDelete(win._id)">
+                            <span>Effacer</span>
+                        </button>
+                    </mat-menu>
+                </ion-item>
+            </ion-list>
+        </div>
+    </section>
+</ion-content>

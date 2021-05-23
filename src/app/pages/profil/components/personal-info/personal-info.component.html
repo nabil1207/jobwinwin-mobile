@@ -1,0 +1,181 @@
+<div appScrollToTop>
+  <form class="d-block" [formGroup]="form" (ngSubmit)="onSave()">
+
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+      <div class="w-100" fxLayout="column" fxFlex.xs="100%">
+        <ion-item class="custom-input">
+          <ion-label position="floating">Nom <span class="required">*</span></ion-label>
+          <ion-input type="text" formControlName="lastName"></ion-input>
+        </ion-item>
+        <small class="text-error"
+          *ngIf="form.get('lastName').invalid && (form.get('lastName').dirty || form.get('lastName').touched) ">
+          Champ obligatoire
+        </small>
+      </div>
+
+      <div class="w-100" fxLayout="column" fxFlex.xs="45%">
+        <ion-item class="custom-input">
+          <ion-label position="floating">Prénom <span class="required">*</span></ion-label>
+          <ion-input type="text" formControlName="firstName"></ion-input>
+        </ion-item>
+        <small class="text-error"
+          *ngIf="form.get('firstName').invalid && (form.get('firstName').dirty || form.get('firstName').touched) ">
+          Champ obligatoire
+        </small>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+      <div class="w-100" fxLayout="column" fxFlex.xs="45%">
+        <ion-item class="custom-datetime">
+          <ion-label position="floating">Date Naissance <span class="required">*</span></ion-label>
+          <ion-datetime placeholder="Choissez votre date" formControlName="birthday">
+          </ion-datetime>
+        </ion-item>
+        <small class="text-error"
+          *ngIf="form.get('birthday').invalid && (form.get('birthday').dirty || form.get('birthday').touched) ">
+          Champ obligatoire
+        </small>
+      </div>
+
+      <div class="w-100" fxLayout="column" fxFlex.xs="45%">
+        <ion-item class="custom-select">
+          <ion-label position="floating">Sexe <span class="required">*</span></ion-label>
+          <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+            formControlName="gender">
+            <ion-select-option value="masculin">Homme</ion-select-option>
+            <ion-select-option value="feminin">Femme</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <small class="text-error"
+          *ngIf="form.get('gender').invalid && (form.get('gender').dirty || form.get('gender').touched) ">
+          Champ obligatoire
+        </small>
+      </div>
+    </div>
+
+
+
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+      <div class="w-100" fxLayout="column" fxFlex.xs="45%">
+        <div class="w-100 custom-input">
+          <ion-item class="custom-input">
+            <ion-label position="floating">Téléphone (+212) <span class="required">*</span></ion-label>
+            <ion-input type="tel" formControlName="phoneNumber"></ion-input>
+          </ion-item>
+        </div>
+        <small class="text-error"
+          *ngIf="form.get('phoneNumber').invalid && (form.get('phoneNumber').dirty || form.get('phoneNumber').touched) ">
+          Champ obligatoire
+        </small>
+      </div>
+
+      <div class="w-100" fxLayout="column" fxFlex.xs="45%">
+        <ion-item class="custom-select w-100">
+          <ion-label position="floating">Disponiblité <span class="required">*</span></ion-label>
+          <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+            formControlName="availability">
+            <ion-select-option *ngFor="let item of globalService.availabilities" [value]="item._id">
+              {{item.name}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <small class="text-error"
+          *ngIf="form.get('availability').invalid && (form.get('availability').dirty || form.get('availability').touched) ">
+          Champ obligatoire
+        </small>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <div class="w-100" fxLayout="column" fxFlex.xs="100%">
+        <ion-item class="custom-select w-100">
+          <ion-label position="floating">Nombre d’années d’experience <span class="required">*</span></ion-label>
+          <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+            formControlName="experienceYears">
+            <ion-select-option *ngFor="let item of globalService.experiences" [value]="item._id">
+              {{item.name}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <small class="text-error"
+          *ngIf="form.get('experienceYears').invalid && (form.get('experienceYears').dirty || form.get('experienceYears').touched) ">
+          Champ obligatoire
+        </small>
+      </div>
+    </div>
+
+    <ion-item class="custom-input w-100">
+      <ion-label position="floating">Poste actuel <span class="required">*</span></ion-label>
+      <ion-input type="text" formControlName="currentJob"></ion-input>
+    </ion-item>
+    <small class="text-error"
+      *ngIf="form.get('currentJob').invalid && (form.get('currentJob').dirty || form.get('currentJob').touched) ">
+      Champ obligatoire
+    </small>
+
+
+    <ion-item class="custom-input w-100">
+      <ion-label position="floating">Préciser salaire actuel (Dhs) <span class="required">*</span></ion-label>
+      <ion-input type="number" formControlName="currentSalary"></ion-input>
+    </ion-item>
+    <small class="text-error"
+      *ngIf="form.get('currentSalary').invalid && (form.get('currentSalary').dirty || form.get('currentSalary').touched) ">
+      Champ obligatoire
+    </small>
+
+
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+      <div class="w-100" fxLayout="column" fxFlex.xs="45%">
+        <ion-item class="custom-select w-100">
+          <ion-label position="floating">Niv. managérial <span class="required">*</span></ion-label>
+          <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+            formControlName="managerialLevel">
+            <ion-select-option *ngFor="let item of globalService.managerialLevels" [value]="item._id">
+              {{item.name}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <small class="text-error"
+          *ngIf="form.get('managerialLevel').invalid && (form.get('managerialLevel').dirty || form.get('managerialLevel').touched) ">
+          Champ obligatoire
+        </small>
+      </div>
+
+      <div class="w-100" fxLayout="column" fxFlex.xs="45%">
+        <ion-item class="custom-select w-100">
+          <ion-label position="floating">Effectif Géré <span class="required">*</span></ion-label>
+          <ion-select class="w-100" ok-text="Ok" cancel-text="Annuler" placeholder="Sélectionner"
+            formControlName="effective">
+            <ion-select-option *ngFor="let item of globalService.effectives" [value]="item._id">
+              {{item.name}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <small class="text-error"
+          *ngIf="form.get('effective').invalid && (form.get('effective').dirty || form.get('effective').touched) ">
+          Champ obligatoire
+        </small>
+      </div>
+    </div>
+
+    <div class="w-100 mt-1">
+      <mat-form-field class="w-100">
+        <mat-label>Objectif <span class="required">*</span></mat-label>
+        <textarea matInput placeholder="Mission générale" matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=7
+          formControlName="goal"></textarea>
+      </mat-form-field>
+      <small class="text-error"
+        *ngIf="form.get('goal').invalid && (form.get('goal').dirty || form.get('goal').touched) ">
+        Champ obligatoire
+      </small>
+    </div>
+
+    <div class="mt-3 text-center">
+      <ion-button type="submit" class="w-80" color="primary" [disabled]="!form.valid">
+        Continuez
+      </ion-button>
+    </div>
+
+  </form>
+</div>

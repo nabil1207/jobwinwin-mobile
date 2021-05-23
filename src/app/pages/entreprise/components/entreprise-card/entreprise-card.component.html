@@ -1,0 +1,185 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons (click)="goBack()" class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <ion-buttons slot="primary">
+            <ion-button routerLink="/dashboard/settings">
+                <ion-icon slot="icon-only" ios="settings-outline" md="settings-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+        <ion-title>Profil entreprise</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="entreprise-card">
+        <div class="page-content">
+
+            <div class="entreprise-profil">
+                <div class="d-block position-relative mr-auto pt-1" style="width: 120px">
+                    <app-file-uploader [data]="value" (fileChanges)="fileChanges($event)"></app-file-uploader>
+                </div>
+                <div class="text-center mt-1 py-1 pb-1">
+                    <span class="name ml-1">{{ authService.user.company.name }}</span> <br>
+                    <span class="post ml-1">{{ activitySector }}</span><br>
+                    <span class="city ml-1">{{ authService.user.company.city }}</span>
+                </div>
+            </div>
+
+            <div class="bg-light px-1 py-2">
+                <span (click)="openSlogan()">
+                    <mat-icon class="float-right" color="primary">edit</mat-icon>
+                </span>
+                <p class="desciption text-center mb-1">
+                    {{ authService.user.company.title }}
+                </p>
+            </div>
+
+            <div class="objectif border-bottom bg-light">
+                <h3 class="title">PRÉSENTATION GÉNÉRALE
+                    <span (click)="openPresentation()">
+                        <mat-icon class="float-right" color="primary">edit</mat-icon>
+                    </span>
+                </h3>
+                <p class="desciption-objectif text-center mb-1">
+                    {{ authService.user.company.description }}
+                </p>
+            </div>
+
+            <div class="skils bg-light">
+                <h3 class="title">VALEURS
+                    <mat-icon class="align-middle ml-1" color="primary" (click)="openValues()">add</mat-icon>
+                </h3>
+
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="ion-align-self-center">
+                        <img src="./assets/icon/circle-website.svg" alt="website">
+                    </ion-col>
+                    <ng-container *ngIf="authService.user.company.webSite else addWebSite">
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>{{ authService.user.company.webSite }}</span>
+                        </ion-col>
+                    </ng-container>
+                    <ng-template #addWebSite>
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>Ajoutez le lien de wiste web</span>
+                        </ion-col>
+                    </ng-template>
+                </ion-row>
+
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="ion-align-self-center">
+                        <img src="./assets/icon/circle-facebook.svg" alt="facebook">
+                    </ion-col>
+
+                    <ng-container *ngIf="authService.user.company.facebook else addFacebook">
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>{{authService.user.company.facebook}}</span>
+                        </ion-col>
+                    </ng-container>
+                    <ng-template #addFacebook>
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>Ajoutez le compte facebook</span>
+                        </ion-col>
+                    </ng-template>
+                </ion-row>
+
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="ion-align-self-center">
+                        <img src="./assets/icon/circle-instagram.svg" alt="instagram">
+                    </ion-col>
+                    <ng-container *ngIf="authService.user.company.instagram else addInstagram">
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>{{authService.user.company.instagram}}</span>
+                        </ion-col>
+                    </ng-container>
+                    <ng-template #addInstagram>
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>Ajoutez le compte instagram</span>
+                        </ion-col>
+                    </ng-template>
+                </ion-row>
+
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="ion-align-self-center">
+                        <img src="./assets/icon/circle-twitter.svg" alt="twitter">
+                    </ion-col>
+
+                    <ng-container *ngIf="authService.user.company.twitter else addTwitter">
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>{{authService.user.company.twitter}}</span>
+                        </ion-col>
+                    </ng-container>
+                    <ng-template #addTwitter>
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>Ajoutez un compte twitter</span>
+                        </ion-col>
+                    </ng-template>
+                </ion-row>
+
+                <ion-row class="ion-justify-content-center py-1">
+                    <ion-col size="2" class="ion-align-self-center">
+                        <img src="./assets/icon/circle-linkedin.svg" alt="linkedin">
+                    </ion-col>
+                    <ng-container *ngIf="authService.user.company.linkedin else addLinkedIn">
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>{{authService.user.company.linkedin}}</span>
+                        </ion-col>
+                    </ng-container>
+                    <ng-template #addLinkedIn>
+                        <ion-col size="10" class="ion-align-self-center">
+                            <span>Ajoutez un compte linkedin</span>
+                        </ion-col>
+                    </ng-template>
+                </ion-row>
+
+                <div class="links cursor-pointer" (click)="openLinks()">
+                    Modifier vos réseau sociaux
+                </div>
+            </div>
+
+            <div class="annonces bg-light">
+                <h3 class="title">ANNONCES</h3>
+                <div *ngIf="advertisements.length > 0 else newAdvertisement">
+                    <ion-row class="advertisement-detail w-100 mt-1"
+                        *ngFor="let advertisement of advertisements">
+                        <ion-col size="12" class="ion-align-self-start">
+                            <div class="advertisement-data">
+                                <h2 class="advertisement-name">{{advertisement.desiredJob}}</h2>
+                                <p class="city">{{ advertisement.location }}</p>
+                                <p class="salary">De {{ advertisement.supposedSalaryMin }} DH</p>
+                                <p class="salary">à {{ advertisement.supposedSalaryMax }} DH</p>
+                            </div>
+                        </ion-col>
+                        <ion-col size="3" class="advertisement-info text-left">
+                            {{advertisement.views}} <br>
+                            Vues
+                        </ion-col>
+                        <ion-col size="3" class="advertisement-info text-left">
+                            {{ advertisement.wins }} <br>
+                            Wins
+                        </ion-col>
+                        <ion-col size="6" class="advertisement-info text-left">
+                            Édité le {{advertisement.updatedAt | date:'dd/MM'}}<br>
+                            {{ advertisement.recruiter.firstName }} {{ advertisement.recruiter.lastName }}
+                        </ion-col>
+                    </ion-row>
+                </div>
+                <div class="text-center mt-1">
+                    <ion-button class="light-color w-80" routerLink="/dashboard/advertisement/slider-advertisement"
+                        routerDirection="root">
+                        <ion-icon name="add"></ion-icon>
+                        Ajouter une annonce
+                    </ion-button>
+                </div>
+                <ng-template #newAdvertisement>
+                    <div class="d-block position-relative mr-auto pt-1 w-30">
+                        <img src="./assets/img/not-found.svg" alt="Not found">
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </section>
+
+</ion-content>

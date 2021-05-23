@@ -1,0 +1,31 @@
+<ion-header class="steps-header ion-no-border" mode="md">
+    <ion-toolbar class="steps-toolbar">
+        <ion-buttons slot="start">
+            <ion-button class="roundbutton p-0" (click)="back()">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button (click)="desconnect()">
+                <ion-icon src="./assets/icon/deconnexion-white.svg"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title class="page-title">
+            <h1 class="title mb-0">{{pageTitle}}</h1>
+        </ion-title>
+    </ion-toolbar>
+    <div class="progressbar w-100">
+        <div class="porcent" [ngStyle]="{'width': (candidateService.percentage | async | number: '1.0-0') + '%'}">
+            <div class="counter text-center">
+                {{ candidateService.percentage | async | number: '1.0-0' }} %
+             </div>
+        </div>
+    </div>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="steps-content mt-1">
+        <div class="page-content">
+           <router-outlet></router-outlet>
+        </div>
+    </section>
+</ion-content>

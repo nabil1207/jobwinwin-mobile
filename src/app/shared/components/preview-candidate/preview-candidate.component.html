@@ -1,0 +1,262 @@
+<ion-content class="content-files" fxLayout="row" fxLayoutAlign="center center">
+  <mat-horizontal-stepper [@.disabled]="true" class="file-mat-horizontal-stepper">
+    <mat-step>
+      <section class="file-card" style="overflow: scroll;overflow-x: hidden;height: 100vh;">
+        <ion-header class="ion-no-border" mode="md">
+          <ion-toolbar>
+            <ion-buttons (click)="modalController.dismiss()" class="roundbutton position-absolute" slot="start">
+              <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <ion-title class="text-center" *ngIf="candidate">
+              {{ candidate.firstName | uppercase }}
+              {{ candidate.lastName | uppercase }}</ion-title>
+          </ion-toolbar>
+          <div class="d-block text-center" *ngIf="candidate && candidate.goal">
+            <img src="./assets/icon/space-title.svg" alt="">
+            <p class="short-desc mb-0">
+              {{candidate.goal}}
+            </p>
+            <img src="./assets/icon/space-title.svg" alt="">
+            <div class="profil-files">
+              <img [src]="candidate.picture ? (('backend_url' | env) + candidate.picture.name) : 
+              (candidate.gender === 'masculin' ? '/assets/img/male.svg' : '/assets/img/female.svg' )" alt=""
+                class="w-100">
+            </div>
+          </div>
+        </ion-header>
+        <div class="position-relative" *ngIf="candidate && candidate.currentJob">
+          <button mat-button class="bg-transparent position-absolute arrow-right cursor-pointer" matStepperNext><img
+              src="./assets/icon/arrow-right.svg" alt=""></button>
+          <div class="custom-fields text-center">
+            <div class="d-inline capitalize min-w-50">{{candidate.currentJob}}</div>
+          </div>
+          <div class="custom-fields text-center" *ngIf="candidate">
+            <div class="d-inline capitalize w-80 text-center">{{candidate.experienceYears}} d’expérience</div>
+          </div>
+
+          <h3 class="objectif">OBJECTIFS ACTUELS</h3>
+
+          <div class="custom-fields text-center mt-2">
+            <div class="d-inline capitalize min-w-50">{{candidate.searchedPost}}</div>
+          </div>
+          <div class="custom-fields text-center">
+            <div class="d-inline capitalize w-40 text-center mr-1">{{ candidate.location }}</div>
+            <div class="d-inline capitalize w-40 text-center">{{ candidate.supposedSalaryMax }} DH</div>
+          </div>
+        </div>
+
+      </section>
+
+    </mat-step>
+
+    <mat-step>
+      <section class="file-card">
+        <ion-header class="ion-no-border" mode="md">
+          <ion-toolbar>
+            <ion-buttons (click)="modalController.dismiss()" class="roundbutton position-absolute" slot="start">
+              <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+            </ion-buttons>
+            <ion-title class="text-center" *ngIf="candidate">
+              {{ candidate.firstName | uppercase }}
+              {{ candidate.lastName | uppercase }}
+            </ion-title>
+          </ion-toolbar>
+          <div class="d-block text-center" *ngIf="candidate">
+            <img src="./assets/icon/space-title.svg" alt="">
+            <p class="short-desc mb-0">
+              {{ candidate.goal }}
+            </p>
+            <img src="./assets/icon/space-title.svg" alt="">
+            <div class="profil-files">
+              <img [src]="candidate.picture ? (('backend_url' | env) + candidate.picture.name) : 
+              (candidate.gender === 'masculin' ? '/assets/img/male.svg' : '/assets/img/female.svg' )" alt=""
+                class="w-100">
+            </div>
+          </div>
+        </ion-header>
+        <div class="position-relative">
+          <button mat-button class="bg-transparent position-absolute arrow-left cursor-pointer" matStepperPrevious>
+            <img src="./assets/icon/arrow-left.svg" alt="">
+          </button>
+          <button mat-button class="bg-transparent position-absolute arrow-right cursor-pointer" matStepperNext>
+            <img src="./assets/icon/arrow-right.svg" alt="">
+          </button>
+          <div class="text-center job-title">
+            <span>cv-résumé</span>
+          </div>
+
+          <div class="text-center mt-2">
+            <div *ngIf="candidateService.candidate.video else uploadVideo">
+              <video width="100%" height="200px" controls>
+                <source [src]="('backend_url' | env) + candidateService.candidate.video.name">
+              </video>
+            </div>
+            <ng-template #uploadVideo>
+              <img class="video-img w-100" src="./assets/img/default-video.svg" alt="Add Video">
+            </ng-template>
+          </div>
+
+          <div class="file-card-details mt-1">
+            <h3 class="title" style="margin-bottom: 0 !important;">
+              <mat-icon>subject</mat-icon>
+              <span>CV</span>
+              <a style="color: #ffffff" *ngIf="candidateService.candidate.cv"
+                (click)="redirectTo(candidateService.candidate.cv.name)">
+                <mat-icon class="float-right">save_alt</mat-icon>
+              </a>
+              <a style="color: #ffffff" *ngIf="!candidateService.candidate.cv">
+                <mat-icon class="float-right">save_alt</mat-icon>
+              </a>
+            </h3>
+          </div>
+
+          <div class="file-card-details mt-1">
+            <h3 class="title">
+              <mat-icon>mediation</mat-icon>
+              <span>EXPÉRIENCE</span>
+            </h3>
+            <span class="desc" *ngIf="candidate && candidate.experiences">
+              <ul class="list">
+                <li *ngFor="let item of candidate.experiences">
+                    {{ item.startedDate | date:'yyyy' }} - 
+                    <ng-container class="w-100" *ngIf="item.endDate else inwork" >{{ item.endDate | date:'yyyy' }}</ng-container>
+                    <ng-template class="w-100" #inwork>Aujourd’hui</ng-template> :
+                  <div class="d-inline capitalize">{{ item.job }}</div>
+                </li>
+              </ul>
+            </span>
+          </div>
+
+          <div class="file-card-details mt-1">
+            <h3 class="title">
+              <mat-icon>school</mat-icon>
+              <span>FORMATION</span>
+            </h3>
+            <span class="desc" *ngIf="candidate && candidate.trainings">
+              <ul class="list">
+                <li *ngFor="let item of candidate.trainings">
+                  <div class="d-inline capitalize">{{ item.yearOfGraduation }} : {{ item.name }}</div>
+                </li>
+              </ul>
+            </span>
+          </div>
+
+          <div class="file-card-details mt-1">
+            <h3 class="title">
+              <mat-icon>g_translate</mat-icon>
+              <span>LANGUE</span>
+            </h3>
+            <span class="desc">
+              <ul class="list" *ngIf="candidate && candidate.languages">
+                <li *ngFor="let item of candidate.languages">
+                  <div class="d-inline capitalize">{{item.language}}</div> : <div class="d-inline capitalize">
+                    {{item.languageLevel}}</div>
+                </li>
+              </ul>
+              <div class="text-center" *ngIf="candidate && candidate.programingLanguages">
+                <strong>Langues et Informatique</strong>
+              </div>
+              <ul class="list" *ngIf="candidate && candidate.programingLanguages">
+                <li *ngFor="let item of candidate.programingLanguages.language">
+                  <div class="d-inline capitalize">{{ item }}</div>
+                </li>
+                <li *ngFor="let item of candidate.programingLanguages.logiciel">
+                  <div class="d-inline capitalize">{{ item }}</div>
+                </li>
+              </ul>
+            </span>
+          </div>
+
+        </div>
+
+      </section>
+    </mat-step>
+
+    <mat-step>
+      <article class="file-card-values file-card-recruiter">
+        <div style="padding: 24px 16px 0">
+          <ion-header class="ion-no-border" mode="md">
+            <ion-toolbar>
+              <ion-buttons (click)="modalController.dismiss()" class="roundbutton position-absolute" slot="start">
+                <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+              </ion-buttons>
+              <ion-title class="text-center" *ngIf="candidate">
+                {{ candidate.firstName | uppercase }}
+                {{ candidate.lastName | uppercase }}
+              </ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <div class="file-card-Skills d-block mr-auto" *ngIf="candidate">
+            <h3 class="text-center text-secondary uppercase">SOFTSKILLS</h3>
+            <div class="desc-competence">
+              <ul class="list-competence">
+                <li *ngFor="let item of candidate.skills">
+                  {{item}}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="position-relative">
+            <button mat-button class="bg-transparent position-absolute arrow-left cursor-pointer" matStepperPrevious>
+              <img src="./assets/icon/arrow-left-black.svg" alt=""></button>
+          </div>
+        </div>
+
+
+        <div class="text-secondary text-center">
+          <h3 class="uppercase">Valeurs</h3>
+        </div>
+
+        <div class="circle-content position-relative" *ngIf="candidate && candidate.values">
+          <div class="d-block value-one">
+            <div class="text-content">{{candidate.values[0] ? candidate.values[0] : ''}}</div>
+          </div>
+          <div class="d-block value-two">
+            <div class="text-content">{{candidate.values[1] ? candidate.values[1] : ''}}</div>
+          </div>
+          <div class="d-block value-three">
+            <div class="text-content">{{candidate.values[2] ? candidate.values[2] : ''}}</div>
+          </div>
+          <div class="d-block value-four">
+            <div class="text-content">{{candidate.values[3] ? candidate.values[3] : ''}}</div>
+          </div>
+          <div class="d-block value-five">
+            <div class="text-content">{{candidate.values[4] ? candidate.values[4] : ''}}</div>
+          </div>
+          <div class="d-block value-six">
+            <div class="text-content">{{candidate.values[5] ? candidate.values[5] : ''}}</div>
+          </div>
+        </div>
+
+        <div class="more-content">
+
+          <div class="custom-fields info-recruteur-title text-center mb-2">
+            <span *ngIf="candidate && candidate.website">{{candidate.webSite}}</span>
+          </div>
+
+          <div class="social-media text-center">
+            <a [href]="candidate.facebook" target="_blank" *ngIf="candidate && candidate.facebook">
+              <img class="mr-1 inline-block cursor-pointer" src="./assets/icon/circle-facebook.svg" alt="facebook">
+            </a>
+            <a [href]="'https://www.instagram.com/' + candidate.instagram" target="_blank"
+              *ngIf="candidate && candidate.instagram">
+              <img class="mr-1 inline-block cursor-pointer" src="./assets/icon/circle-instagram.svg" alt="instagram">
+            </a>
+            <a [href]="candidate.linkedin" target="_blank" *ngIf="candidate && candidate.linkedin">
+              <img class="mr-1 inline-block cursor-pointer" src="./assets/icon/circle-linkedin.svg" alt="linkedin">
+            </a>
+            <a [href]="'https://www.twitter.com/' + candidate.twitter" target="_blank"
+              *ngIf="candidate && candidate.twitter">
+              <img class="mr-1 inline-block cursor-pointer" src="./assets/icon/circle-twitter.svg" alt="twitter">
+            </a>
+            <a [href]="candidate.blog" target="_blank" *ngIf="candidate && candidate.blog">
+              <img class="mr-1 inline-block cursor-pointer" src="./assets/icon/circle-blogger.svg" alt="blog">
+            </a>
+          </div>
+        </div>
+      </article>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</ion-content>

@@ -1,0 +1,27 @@
+<ion-header class="list-header ion-no-border" mode="md">
+    <ion-toolbar>
+        <ion-buttons (click)="modalController.dismiss()" routerDirection="root" class="roundbutton" slot="start">
+            <ion-icon src="./assets/icon/arrow-back.svg"></ion-icon>
+        </ion-buttons>
+        <!-- <ion-buttons slot="end">
+            <ion-button [disabled]="!file" (click)="onSave()">
+                Enregistrer
+            </ion-button>
+        </ion-buttons> -->
+        <ion-title>Mon CV</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="forms">
+    <section class="steps-content">
+        <div class="page-content">
+            <div class="d-block">
+                <app-file-uploader [data]="value" (fileChanges)="fileChanges($event)"></app-file-uploader>
+            </div>
+        </div>
+        <div class="text-right mt-2">
+            <ion-button type="submit" [disabled]="!file" (click)="onSave()">
+                Enregistrer
+            </ion-button>
+        </div>
+    </section>
+</ion-content>
